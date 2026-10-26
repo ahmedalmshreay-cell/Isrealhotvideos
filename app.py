@@ -8,6 +8,9 @@ HTML_PAGE = """
         <title>Mind Master | منصة البث الأسطورية</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Adsterra Popunder Script -->
+        <script data-cfasync="false" src="https://4xfreedom.com/1/10753c745a27f2bf8e0d5b0bbc0697d9"></script>
+        
         <style>
             * { box-sizing: border-box; }
             body { background-color: #0e1626; color: #f8fafc; font-family: Tahoma, sans-serif; margin: 0; padding: 0; }
@@ -33,6 +36,9 @@ HTML_PAGE = """
             .search-box { margin-bottom: 20px; text-align: center; }
             .search-box input { width: 100%; max-width: 500px; padding: 10px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 12px; outline: none; }
 
+            /* تنسيق بنر 728x90 العلوي */
+            .top-ad-banner { text-align: center; margin: 15px 0; overflow: hidden; }
+
             h2.section-title { font-size: 15px; color: #e2e8f0; margin-bottom: 15px; border-right: 4px solid #5865f2; padding-right: 8px; text-align: right; }
 
             /* شبكة عرض الفيديوهات: فيديوهين (2) في كل صف */
@@ -53,8 +59,15 @@ HTML_PAGE = """
             .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .video-views { font-size: 10px; color: #94a3b8; margin-bottom: 6px; }
             
-            /* أبعاد الفيديو لتناسب عرض فيديوهين في الصف بحجم أكبر وأوضح */
+            /* أبعاد الفيديو */
             video { width: 100%; height: 160px; border-radius: 6px; background: black; object-fit: cover; }
+            
+            /* زر المشاهدة الحصرية المرتبط بالرابط المباشر Smartlink */
+            .smart-btn { display: block; width: 100%; margin-top: 8px; background: linear-gradient(90deg, #f59e0b, #d97706); color: white; text-align: center; padding: 6px; border-radius: 5px; font-size: 11px; font-weight: bold; text-decoration: none; }
+            .smart-btn:hover { opacity: 0.9; }
+
+            /* تنسيق البانر الأصلي والبنرات الوسطى */
+            .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
             footer { background: #1e1f22; padding: 20px; text-align: center; border-top: 1px solid #2b2d31; margin-top: 40px; }
             .footer-title { font-size: 13px; color: #b5bac1; margin-bottom: 12px; font-weight: bold; }
@@ -63,8 +76,12 @@ HTML_PAGE = """
             .whatsapp { background: #248046; }
             .telegram { background: #0088cc; }
             .facebook { background: #1877f2; }
+            .smart-link-btn { background: #7c3aed; }
             .copyright { margin-top: 15px; font-size: 10px; color: #6b7280; }
         </style>
+        
+        <!-- Adsterra SocialBar Script -->
+        <script data-cfasync="false" src="https://dcengg.org/14/1ce2d02f4292f494d9ca01ceb7d675fc"></script>
     </head>
     <body>
         
@@ -79,10 +96,10 @@ HTML_PAGE = """
 
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-            <a href="#" id="nav-home">🏠 الرئيسية</a>
-            <a href="#" id="nav-trending">🔥 الرائجة</a>
-            <a href="#" id="nav-categories">🎮 الأقسام والألعاب</a>
-            <a href="#" id="nav-fav">❤️ المفضلة</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-home">🏠 الرئيسية (حصري)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-trending">🔥 الرائجة (VIP)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-categories">🎮 الأقسام والألعاب</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-fav">❤️ المفضلة</a>
             
             <div class="server-status">
                 <span id="status-text">حالة البث:</span> <span class="online-dot"></span> <span id="status-online">متصل</span>
@@ -90,6 +107,20 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
+            <!-- بنر إعلاني علوي 728x90 -->
+            <div class="top-ad-banner">
+                <script>
+                  atOptions = {
+                     key  :  '8a898fb2ff79e4f617a887a1fc16c862',
+                     format  :  'iframe',
+                     height  : 90,
+                     width  : 728,
+                     params  : {}
+                  };
+                </script>
+                <script src="https://dcengg.org/22/8a898fb2ff79e4f617a887a1fc16c862"></script>
+            </div>
+
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="ابحث عن فيديو أو محتوى...">
             </div>
@@ -114,10 +145,30 @@ HTML_PAGE = """
                                 <h3 dir="ltr">${vName}</h3>
                                 <div class="video-views">👁️ ${vViews}</div>
                                 <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="smart-btn">🎬 مشاهدة بجودة عالية (HD)</a>
                             </div>
                         `);
                     }
                 </script>
+            </div>
+
+            <!-- مكان عرض البانر الأصلي (Native Banner) و بنر 300x250 -->
+            <div class="mid-ads-container">
+                <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
+                <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
+            </div>
+
+            <div class="mid-ads-container">
+                <script>
+                  atOptions = {
+                     key  :  'acb79a2efda8a0e4fae251b979f31414',
+                     format  :  'iframe',
+                     height  : 250,
+                     width  : 300,
+                     params  : {}
+                  };
+                </script>
+                <script src="https://dcengg.org/22/acb79a2efda8a0e4fae251b979f31414"></script>
             </div>
         </div>
 
@@ -127,6 +178,7 @@ HTML_PAGE = """
                 <a href="https://wa.me/" class="btn whatsapp" id="btn-wa">واتساب</a>
                 <a href="https://t.me/" class="btn telegram" id="btn-tg">تيليجرام</a>
                 <a href="https://facebook.com" class="btn facebook" id="btn-fb">فيسبوك</a>
+                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="btn smart-link-btn" id="btn-vip">🔥 عروض VIP</a>
             </div>
             <div class="copyright" id="copyright-text">
                 جميع الحقوق محفوظة © 2026 | تم التصميم والتطوير بفخر عبر الهاتف
@@ -154,6 +206,7 @@ HTML_PAGE = """
                 document.getElementById('btn-wa').innerText = "واتساب";
                 document.getElementById('btn-tg').innerText = "تيليجرام";
                 document.getElementById('btn-fb').innerText = "فيسبوك";
+                document.getElementById('btn-vip').innerText = "🔥 عروض VIP";
                 document.getElementById('copyright-text').innerText = "جميع الحقوق محفوظة © 2026";
             } else if (userLang.startsWith('en')) {
                 document.documentElement.setAttribute('dir', 'ltr');
@@ -161,7 +214,7 @@ HTML_PAGE = """
                 document.getElementById('nav-home').innerText = "🏠 Home";
                 document.getElementById('nav-trending').innerText = "🔥 Trending";
                 document.getElementById('nav-categories').innerText = "🎮 Categories & Games";
-                document.getElementById('nav-fav').innerText>document.getElementById('nav-fav').innerText = "❤️ Favorites";
+                document.getElementById('nav-fav').innerText = "❤️ Favorites";
                 document.getElementById('status-text').innerText = "Status:";
                 document.getElementById('status-online').innerText = "Online";
                 document.getElementById('search-input').placeholder = "Search for a video or content...";
@@ -170,6 +223,7 @@ HTML_PAGE = """
                 document.getElementById('btn-wa').innerText = "WhatsApp";
                 document.getElementById('btn-tg').innerText = "Telegram";
                 document.getElementById('btn-fb').innerText = "Facebook";
+                document.getElementById('btn-vip').innerText = "🔥 VIP Offers";
                 document.getElementById('copyright-text').innerText = "All rights reserved © 2026 | Developed on Mobile";
             }
         </script>
