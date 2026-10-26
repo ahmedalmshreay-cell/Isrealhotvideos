@@ -148,7 +148,7 @@ HTML_TEMPLATE = """
 
         <!-- الفيديو الثالث (بعد تعديل العنوان وحذف الحرف الزائد) -->
         <div class="video-card">
-            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הקטע הלוهט ביותר השנה - צפייה בלעדית</div>
+            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הקטע הלוט ביותר השנה - צפייה בלעדית</div>
             <div class="video-container">
                 <video id="vid3" src="https://files.catbox.moe/fjo10s.mp4" playsinline muted></video>
                 <div class="locker-overlay" id="overlay3">
