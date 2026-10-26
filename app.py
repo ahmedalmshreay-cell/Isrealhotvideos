@@ -138,7 +138,7 @@ HTML_TEMPLATE = """
                     <div class="lock-desc" id="status2">שתף בטלגרם 5 פעמים (0/5)</div>
                     <div class="locker-actions">
                         <button class="btn-telegram-share" onclick="handleShare(2, 5, 40)"><i class="fa-brands fa-telegram"></i> שיתוף בטלגרם לפתיחה 🔥</button>
-                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 كוכבים)</a>
+                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 כוכבים)</a>
                     </div>
                 </div>
             </div>
@@ -160,7 +160,6 @@ HTML_TEMPLATE = """
             </div>
         </div>
 
-        <!-- زر الاشتراك السفلي كما هو دون تغيير -->
         <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="bottom-group-btn">
             <i class="fa-brands fa-telegram fa-bounce"></i> הצטרף עכשיו לערוץ/קבוצת הסרטונים המלאה בטלגרם 🚀
         </a>
@@ -183,7 +182,6 @@ HTML_TEMPLATE = """
         });
 
         function handleShare(videoNum, displayTarget, hiddenTarget) {
-            // أزرار النشر تنشر رابط البوت مع البدء الآلي
             let botUrl = encodeURIComponent("https://t.me/ASDAKBOT?start=1");
             let shareText = encodeURIComponent("🔥 הסרטונים הלוהטים ביותר ברשת! היכנסו לבוט עכשיו:");
             
@@ -202,8 +200,23 @@ HTML_TEMPLATE = """
             if (currentReal >= hiddenTarget) {
                 document.getElementById('overlay' + videoNum).classList.add('unlocked');
                 let v = document.getElementById('vid' + videoNum);
-                v.muted = false;
-                v.play();
+                
+                if (videoNum === 1) {
+                    v.muted = false;
+                    v.currentTime = 0;
+                    let playPromise = v.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            document.addEventListener('touchstart', function() {
+                                v.muted = false;
+                                v.play();
+                            }, { once: true });
+                        });
+                    }
+                } else {
+                    v.muted = false;
+                    v.play();
+                }
             } else {
                 document.getElementById('status' + videoNum).innerText = `נותרו עוד ${displayTarget - currentFake} שיתופים (${currentFake}/${displayTarget})`;
             }
