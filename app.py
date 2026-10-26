@@ -112,7 +112,7 @@ HTML_TEMPLATE = """
     </div>
 
     <div class="container">
-        <!-- الفيديو الأول بالرابط الجديد الخفيف -->
+        <!-- الفيديو الأول -->
         <div class="video-card">
             <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> תיעוד בלעדי ששבר את הרשת! (2026)</div>
             <div class="video-container">
@@ -123,14 +123,15 @@ HTML_TEMPLATE = """
                     <div class="lock-desc" id="status1">שתף בטלגרם 3 פעמים (0/3)</div>
                     <div class="locker-actions">
                         <button class="btn-telegram-share" onclick="handleShare(1, 3, 3)"><i class="fa-brands fa-telegram"></i> שיתוף בטלגרם לפתיחה 🔥</button>
-                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 كוכבים)</a>
+                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 כוכבים)</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- الفيديو الثاني (بعد تعديل العنوان وحذف الحرف الزائد) -->
         <div class="video-card">
-            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הסרטון שכולם מדברים עליהם (אסור לפسפס)</div>
+            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הסרטון שכולם מדברים עליה (אסור לפספס)</div>
             <div class="video-container">
                 <video id="vid2" src="https://files.catbox.moe/qwc5h3.mp4" playsinline muted></video>
                 <div class="locker-overlay" id="overlay2">
@@ -145,6 +146,7 @@ HTML_TEMPLATE = """
             </div>
         </div>
 
+        <!-- الفيديو الثالث (بعد تعديل العنوان وحذف الحرف الزائد) -->
         <div class="video-card">
             <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הקטע הלוهט ביותר השנה - צפייה בלעדית</div>
             <div class="video-container">
