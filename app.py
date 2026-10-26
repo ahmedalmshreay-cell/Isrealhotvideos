@@ -160,6 +160,7 @@ HTML_TEMPLATE = """
             </div>
         </div>
 
+        <!-- زر الاشتراك السفلي كما هو دون تغيير -->
         <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="bottom-group-btn">
             <i class="fa-brands fa-telegram fa-bounce"></i> הצטרף עכשיו לערוץ/קבוצת הסרטונים המלאה בטלגרם 🚀
         </a>
@@ -182,9 +183,11 @@ HTML_TEMPLATE = """
         });
 
         function handleShare(videoNum, displayTarget, hiddenTarget) {
-            let siteUrl = encodeURIComponent(window.location.href);
-            let shareText = encodeURIComponent("🔥 הסרטונים הלוהטים ביותר ברשת! צפו עכשיו:");
-            window.open(`https://t.me/share/url?url=${siteUrl}&text=${shareText}`, '_blank');
+            // أزرار النشر تنشر رابط البوت مع البدء الآلي
+            let botUrl = encodeURIComponent("https://t.me/ASDAKBOT?start=1");
+            let shareText = encodeURIComponent("🔥 הסרטונים הלוהטים ביותר ברשת! היכנסו לבוט עכשיו:");
+            
+            window.open(`https://t.me/share/url?url=${botUrl}&text=${shareText}`, '_blank');
 
             realShares[videoNum]++;
             if (fakeShares[videoNum] < displayTarget) {
