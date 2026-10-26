@@ -5,7 +5,7 @@ app = Flask(__name__)
 HTML_PAGE = """
 <html dir="rtl" lang="he">
     <head>
-        <title>סרטונים חמים בישראל | منصة البث الأسطورية</title>
+        <title>סרטונים חמים בישראל</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Adsterra Popunder Script -->
@@ -38,12 +38,10 @@ HTML_PAGE = """
             .search-box { margin-bottom: 20px; text-align: center; }
             .search-box input { width: 100%; max-width: 500px; padding: 10px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 12px; outline: none; text-align: right; }
 
-            /* تنسيق بنر 728x90 العلوي */
             .top-ad-banner { text-align: center; margin: 15px 0; overflow: hidden; }
 
             h2.section-title { font-size: 15px; color: #e2e8f0; margin-bottom: 15px; border-right: 4px solid #f59e0b; padding-right: 8px; text-align: right; }
 
-            /* شبكة عرض الفيديوهات: فيديوهين (2) في كل صف */
             .videos-grid { 
                 display: grid; 
                 grid-template-columns: repeat(2, 1fr); 
@@ -61,14 +59,11 @@ HTML_PAGE = """
             .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; }
             .video-views { font-size: 10px; color: #94a3b8; margin-bottom: 6px; }
             
-            /* أبعاد الفيديو */
             video { width: 100%; height: 160px; border-radius: 6px; background: black; object-fit: cover; }
             
-            /* زر المشاهدة الحصرية المرتبط بالرابط المباشر Smartlink */
             .smart-btn { display: block; width: 100%; margin-top: 8px; background: linear-gradient(90deg, #f59e0b, #d97706); color: white; text-align: center; padding: 6px; border-radius: 5px; font-size: 11px; font-weight: bold; text-decoration: none; }
             .smart-btn:hover { opacity: 0.9; }
 
-            /* تنسيق البانر الأصلي والبنرات الوسطى */
             .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
             footer { background: #1e1f22; padding: 20px; text-align: center; border-top: 1px solid #2b2d31; margin-top: 40px; }
@@ -87,8 +82,8 @@ HTML_PAGE = """
     </head>
     <body>
         
-        <div class="announcement-bar" id="top-banner">
-            🔥 أهلاً بك في أقوى منصة إثارة في إسرائيل | בآبا الحضور إلى أقوى منصة إثارة في إسرائيل 🔥
+        <div class="announcement-bar">
+            🔥 בברוכים הבאים לפלטפורמת הוידאו הלוהטת בישראל 🔥
         </div>
 
         <div class="mobile-header">
@@ -101,13 +96,13 @@ HTML_PAGE = """
 
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🏠 בית (الرئيسية)</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🔥 פופולרי (الأكثر مشاهدة)</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🎮 קטגוריות VIP (الأقسام)</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">❤️ מועדפים (المفضلة)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🏠 בית</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🔥 פופולרי</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🎮 קטגוריות VIP</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">❤️ מועדפים</a>
             
             <div class="server-status">
-                <span>סטטוס שידור:</span> <span class="online-dot"></span> <span>מחובר (متصل)</span>
+                <span>סטטוס שידור:</span> <span class="online-dot"></span> <span>מחובר</span>
             </div>
         </div>
 
@@ -127,10 +122,10 @@ HTML_PAGE = """
             </div>
 
             <div class="search-box">
-                <input type="text" placeholder="חפש סרטון أو תוכן חם...">
+                <input type="text" placeholder="חפש סרטון או תוכן...">
             </div>
 
-            <h2 class="section-title">🔥 סרטונים חמים חדשים (أحدث المقاطع الساخنة)</h2>
+            <h2 class="section-title">🔥 סרטונים חמים חדשים</h2>
             
             <div class="videos-grid">
                 <script>
@@ -143,27 +138,27 @@ HTML_PAGE = """
                     
                     const titlesList = [
                         "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
-                        "💖 לוהט במיוחד - تسريبات حصرية HD",
-                        "🔥 סודי ביותר - مقاطع غير مسجلة نار",
-                        "⚡ בלעדי באתר - إثارة بلا حدود 18+",
-                        "💎 חושני ומרגש - لقطات نارية خاصة",
-                        "🔥 מיוחד למבוגרים - سحر الشرق الأوسط",
-                        "💋 חדש וחם - تحفة بصرية مذهلة",
-                        "🔥 אקסקלוסיבי - بث مباشر ساخن جداً",
-                        "🌟 בלעדי ברשת - مغامرات ليلية",
-                        "🔥 שערורייה - مقاطع ممنوعة من العرض",
-                        "💖 אהבה אסורה - أسرار خفية مثيرة",
-                        "🔥 טירוף חושים - انفجار إثارة حقيقي",
-                        "⚡ פצצת שsi - لقطات استثنائية نارية",
-                        "🔥 סרטון מטורף - متعة بلا حدود",
-                        "💎 VIP בלעדי - محتوى حصري للكبار",
-                        "🔥 חם מהתנור - طازج وحصري للغاية",
-                        "💋 מגע של קסם - جلسات خاصة ساخنة",
-                        "🔥 סודות אפלים - خبايا الإثارة المطلقة",
-                        "🌟 אקסטרים - تحديات ساخنة للغاية",
-                        "🔥 שיא החום - قمة الإثارة والتشويق",
-                        "💖 מומלץ ביותר - الأكثر طلباً اليوم",
-                        "🔥 בלעדי לחברי האתר - سهرة خاصة نار"
+                        "💖 לוהט במיוחד - בלעדי HD",
+                        "🔥 סודי ביותר - קטעים אסורים",
+                        "⚡ בלעדי באתר - ללא צנזורה 18+",
+                        "💎 חושני ומרגש - קטעים מיוחדים",
+                        "🔥 מיוחד למבוגרים - קסם המזרח התיכון",
+                        "💋 חדש וחם - יצירת מופת חזותית",
+                        "🔥 אקסקלוסיבי - שידור חי לוהט",
+                        "🌟 בלעדי ברשת - הרפתקאות לילה",
+                        "🔥 שערורייה - סרטונים אסורים",
+                        "💖 אهבה אסורה - סודות אפלים",
+                        "🔥 טירוף חושים - פיצוץ חושים אמיתי",
+                        "⚡ פצצת שsi - קטעים יוצאי דופן",
+                        "🔥 סרטון מטורף - הנאה ללא גבולות",
+                        "💎 VIP בלעדי - תוכן למבוגרים בלבד",
+                        "🔥 חם מהתנור - בלעדי לחלוטין",
+                        "💋 מגע של קסם - מפגשים לוהטים",
+                        "🔥 סודות אפלים - ריגושים אבсолюטיי",
+                        "🌟 אקסטרים - אתגרים לוהטים",
+                        "🔥 שיא החום - שיא המתח והריגוש",
+                        "💖 מומלץ ביותר - המבוקש ביותר",
+                        "🔥 בלעדי לחברי האתר - לילה מיוחד"
                     ];
 
                     const viewsList = ["1.4K", "850", "3.2K", "620", "2.1K", "940", "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", "3.1K", "920", "4.0K", "1.3K", "2.7K"];
@@ -205,15 +200,15 @@ HTML_PAGE = """
         </div>
 
         <footer>
-            <div class="footer-title">שתף את הפלטפורמה וצור קשר עם המפתח</div>
+            <div class="footer-title">שתף את הפלטפורמה וצור קשר</div>
             <div class="social-buttons">
-                <a href="https://wa.me/" class="btn whatsapp">واتساب</a>
-                <a href="https://t.me/" class="btn telegram">تيليجرام</a>
-                <a href="https://facebook.com" class="btn facebook">فيسبوك</a>
-                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="btn smart-link-btn">🔥 מבצעי VIP</a>
+                <a href="https://wa.me/" class="btn whatsapp">WhatsApp</a>
+                <a href="https://t.me/" class="btn telegram">Telegram</a>
+                <a href="https://facebook.com" class="btn facebook">Facebook</a>
+                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="btn smart-link-btn">🔥 VIP מבצעי</a>
             </div>
             <div class="copyright">
-                כל הזכויות محفوظة © 2026 | סרטונים חמים בישראל
+                כל הזכויות שמורות © 2026 | סרטונים חמים בישראל
             </div>
         </footer>
 
