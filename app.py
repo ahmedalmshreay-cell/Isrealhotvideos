@@ -3,9 +3,9 @@ from flask import Flask
 app = Flask(__name__)
 
 HTML_PAGE = """
-<html>
+<html dir="rtl" lang="he">
     <head>
-        <title>Mind Master | منصة البث الأسطورية</title>
+        <title>סרטונים חמים בישראל | منصة البث الأسطورية</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Adsterra Popunder Script -->
@@ -15,10 +15,12 @@ HTML_PAGE = """
             * { box-sizing: border-box; }
             body { background-color: #0e1626; color: #f8fafc; font-family: Tahoma, sans-serif; margin: 0; padding: 0; }
             
-            .announcement-bar { background: linear-gradient(90deg, #7c3aed, #2563eb); color: white; font-size: 11px; padding: 6px; text-align: center; font-weight: bold; }
+            .announcement-bar { background: linear-gradient(90deg, #7c3aed, #2563eb); color: white; font-size: 12px; padding: 8px; text-align: center; font-weight: bold; }
             .mobile-header { display: flex; align-items: center; justify-content: space-between; background: #1e1f22; padding: 10px 15px; border-bottom: 1px solid #2b2d31; }
             .menu-btn { background: #5865f2; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 16px; cursor: pointer; }
-            .logo-title { color: #5865f2; font-size: 15px; font-weight: bold; margin: 0; }
+            .logo-container { display: flex; align-items: center; gap: 8px; }
+            .logo-emoji { font-size: 18px; }
+            .logo-title { color: #f59e0b; font-size: 15px; font-weight: bold; margin: 0; }
 
             .sidebar { 
                 height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; right: 0; 
@@ -30,16 +32,16 @@ HTML_PAGE = """
             .sidebar .close-btn { position: absolute; top: 10px; left: 15px; font-size: 20px; color: white; cursor: pointer; }
 
             .server-status { margin: 20px; background: #2b2d31; padding: 10px; border-radius: 6px; font-size: 11px; text-align: center; color: #b5bac1; }
-            .online-dot { height: 7px; width: 7px; background-color: #23a55a; border-radius: 50%; display: inline-block; margin-left: 5px; }
+            .online-dot { height: 7px; width: 7px; background-color: #23a55a; border-radius: 50%; display: inline-block; margin-right: 5px; }
 
             .content { padding: 15px; max-width: 1200px; margin: auto; }
             .search-box { margin-bottom: 20px; text-align: center; }
-            .search-box input { width: 100%; max-width: 500px; padding: 10px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 12px; outline: none; }
+            .search-box input { width: 100%; max-width: 500px; padding: 10px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 12px; outline: none; text-align: right; }
 
             /* تنسيق بنر 728x90 العلوي */
             .top-ad-banner { text-align: center; margin: 15px 0; overflow: hidden; }
 
-            h2.section-title { font-size: 15px; color: #e2e8f0; margin-bottom: 15px; border-right: 4px solid #5865f2; padding-right: 8px; text-align: right; }
+            h2.section-title { font-size: 15px; color: #e2e8f0; margin-bottom: 15px; border-right: 4px solid #f59e0b; padding-right: 8px; text-align: right; }
 
             /* شبكة عرض الفيديوهات: فيديوهين (2) في كل صف */
             .videos-grid { 
@@ -56,7 +58,7 @@ HTML_PAGE = """
                 box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
                 text-align: right;
             }
-            .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; }
             .video-views { font-size: 10px; color: #94a3b8; margin-bottom: 6px; }
             
             /* أبعاد الفيديو */
@@ -86,23 +88,26 @@ HTML_PAGE = """
     <body>
         
         <div class="announcement-bar" id="top-banner">
-            🔥 أهلاً بك في منصة البث الأسطورية | تواصل معنا عبر أزرار الدعم في الأسفل
+            🔥 أهلاً بك في أقوى منصة إثارة في إسرائيل | בآبا الحضور إلى أقوى منصة إثارة في إسرائيل 🔥
         </div>
 
         <div class="mobile-header">
-            <h1 class="logo-title">⚡ Mind Master</h1>
+            <div class="logo-container">
+                <span class="logo-emoji">🔥🇮🇱</span>
+                <h1 class="logo-title">סרטונים חמים בישראל</h1>
+            </div>
             <button class="menu-btn" onclick="openNav()">☰</button>
         </div>
 
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-home">🏠 الرئيسية (حصري)</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-trending">🔥 الرائجة (VIP)</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-categories">🎮 الأقسام والألعاب</a>
-            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" id="nav-fav">❤️ المفضلة</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🏠 בית (الرئيسية)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🔥 פופולרי (الأكثر مشاهدة)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">🎮 קטגוריות VIP (الأقسام)</a>
+            <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank">❤️ מועדפים (المفضلة)</a>
             
             <div class="server-status">
-                <span id="status-text">حالة البث:</span> <span class="online-dot"></span> <span id="status-online">متصل</span>
+                <span>סטטוס שידור:</span> <span class="online-dot"></span> <span>מחובר (متصل)</span>
             </div>
         </div>
 
@@ -122,10 +127,10 @@ HTML_PAGE = """
             </div>
 
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="ابحث عن فيديو أو محتوى...">
+                <input type="text" placeholder="חפש סרטון أو תוכן חם...">
             </div>
 
-            <h2 class="section-title" id="section-heading">أحدث المقاطع المضافة</h2>
+            <h2 class="section-title">🔥 סרטונים חמים חדשים (أحدث المقاطع الساخنة)</h2>
             
             <div class="videos-grid">
                 <script>
@@ -135,17 +140,44 @@ HTML_PAGE = """
                         "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
                         "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
                     ];
+                    
+                    const titlesList = [
+                        "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
+                        "💖 לוהט במיוחד - تسريبات حصرية HD",
+                        "🔥 סודי ביותר - مقاطع غير مسجلة نار",
+                        "⚡ בלעדי באתר - إثارة بلا حدود 18+",
+                        "💎 חושני ומרגש - لقطات نارية خاصة",
+                        "🔥 מיוחד למבוגרים - سحر الشرق الأوسط",
+                        "💋 חדש וחם - تحفة بصرية مذهلة",
+                        "🔥 אקסקלוסיבי - بث مباشر ساخن جداً",
+                        "🌟 בלעדי ברשת - مغامرات ليلية",
+                        "🔥 שערורייה - مقاطع ممنوعة من العرض",
+                        "💖 אהבה אסורה - أسرار خفية مثيرة",
+                        "🔥 טירוף חושים - انفجار إثارة حقيقي",
+                        "⚡ פצצת שsi - لقطات استثنائية نارية",
+                        "🔥 סרטון מטורף - متعة بلا حدود",
+                        "💎 VIP בלעדי - محتوى حصري للكبار",
+                        "🔥 חם מהתנור - طازج وحصري للغاية",
+                        "💋 מגע של קסם - جلسات خاصة ساخنة",
+                        "🔥 סודות אפלים - خبايا الإثارة المطلقة",
+                        "🌟 אקסטרים - تحديات ساخنة للغاية",
+                        "🔥 שיא החום - قمة الإثارة والتشويق",
+                        "💖 מומלץ ביותר - الأكثر طلباً اليوم",
+                        "🔥 בלעדי לחברי האתר - سهرة خاصة نار"
+                    ];
+
                     const viewsList = ["1.4K", "850", "3.2K", "620", "2.1K", "940", "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", "3.1K", "920", "4.0K", "1.3K", "2.7K"];
 
                     for(let i = 0; i < videosList.length; i++) {
                         let vName = videosList[i];
+                        let vTitle = titlesList[i];
                         let vViews = viewsList[i];
                         document.write(`
                             <div class="video-card">
-                                <h3 dir="ltr">${vName}</h3>
-                                <div class="video-views">👁️ ${vViews}</div>
+                                <h3>${vTitle}</h3>
+                                <div class="video-views">👁️ ${vViews} צפיות</div>
                                 <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
-                                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="smart-btn">🎬 مشاهدة بجودة عالية (HD)</a>
+                                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="smart-btn">🔥 צפה באיכות גבוהה HD</a>
                             </div>
                         `);
                     }
@@ -173,59 +205,21 @@ HTML_PAGE = """
         </div>
 
         <footer>
-            <div class="footer-title" id="footer-text">شارك المنصة وتواصل مع المطور مباشرة</div>
+            <div class="footer-title">שתף את הפלטפורמה וצור קשר עם המפתח</div>
             <div class="social-buttons">
-                <a href="https://wa.me/" class="btn whatsapp" id="btn-wa">واتساب</a>
-                <a href="https://t.me/" class="btn telegram" id="btn-tg">تيليجرام</a>
-                <a href="https://facebook.com" class="btn facebook" id="btn-fb">فيسبوك</a>
-                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="btn smart-link-btn" id="btn-vip">🔥 عروض VIP</a>
+                <a href="https://wa.me/" class="btn whatsapp">واتساب</a>
+                <a href="https://t.me/" class="btn telegram">تيليجرام</a>
+                <a href="https://facebook.com" class="btn facebook">فيسبوك</a>
+                <a href="https://demper.org/4/cd97dd66aac08206ff8fcb6dc85e8b08" target="_blank" class="btn smart-link-btn">🔥 מבצעי VIP</a>
             </div>
-            <div class="copyright" id="copyright-text">
-                جميع الحقوق محفوظة © 2026 | تم التصميم والتطوير بفخر عبر الهاتف
+            <div class="copyright">
+                כל הזכויות محفوظة © 2026 | סרטונים חמים בישראל
             </div>
         </footer>
 
         <script>
             function openNav() { document.getElementById("mySidebar").style.width = "220px"; }
             function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-
-            // تحديد اللغة تلقائياً (عربي، إنجليزي، عبري)
-            const userLang = navigator.language || navigator.userLanguage;
-            if (userLang.startsWith('he')) {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.getElementById('top-banner').innerText = "🔥 בآبا الحضور إلى منصة البث الأسطورية | التواصل معنا في الأسفل";
-                document.getElementById('nav-home').innerText = "🏠 الرئيسية (בית)";
-                document.getElementById('nav-trending').innerText = "🔥 الرائجة (פופולרי)";
-                document.getElementById('nav-categories').innerText = "🎮 الأقسام والألعاب";
-                document.getElementById('nav-fav').innerText = "❤️ المفضلة";
-                document.getElementById('status-text').innerText = "حالة البث:";
-                document.getElementById('status-online').innerText = "متصل (מחובר)";
-                document.getElementById('search-input').placeholder = "חפש סרטון أو תוכן...";
-                document.getElementById('section-heading').innerText = "أحدث المقاطع المضافة";
-                document.getElementById('footer-text').innerText = "شارك المنصة وتواصل مع المطور";
-                document.getElementById('btn-wa').innerText = "واتساب";
-                document.getElementById('btn-tg').innerText = "تيليجرام";
-                document.getElementById('btn-fb').innerText = "فيسبوك";
-                document.getElementById('btn-vip').innerText = "🔥 عروض VIP";
-                document.getElementById('copyright-text').innerText = "جميع الحقوق محفوظة © 2026";
-            } else if (userLang.startsWith('en')) {
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.getElementById('top-banner').innerText = "🔥 Welcome to the Epic Streaming Platform | Contact us below";
-                document.getElementById('nav-home').innerText = "🏠 Home";
-                document.getElementById('nav-trending').innerText = "🔥 Trending";
-                document.getElementById('nav-categories').innerText = "🎮 Categories & Games";
-                document.getElementById('nav-fav').innerText = "❤️ Favorites";
-                document.getElementById('status-text').innerText = "Status:";
-                document.getElementById('status-online').innerText = "Online";
-                document.getElementById('search-input').placeholder = "Search for a video or content...";
-                document.getElementById('section-heading').innerText = "Latest Added Clips";
-                document.getElementById('footer-text').innerText = "Share the platform & connect with the developer";
-                document.getElementById('btn-wa').innerText = "WhatsApp";
-                document.getElementById('btn-tg').innerText = "Telegram";
-                document.getElementById('btn-fb').innerText = "Facebook";
-                document.getElementById('btn-vip').innerText = "🔥 VIP Offers";
-                document.getElementById('copyright-text').innerText = "All rights reserved © 2026 | Developed on Mobile";
-            }
         </script>
     </body>
 </html>
