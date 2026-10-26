@@ -104,7 +104,7 @@ HTML_TEMPLATE = """
     <div class="vip-section">
         <div class="vip-info-box">
             🔥 מחיר כניסה: 2500 כוכבי טלגרם (4,000 סרטונים)<br>
-            🎁 כולל 2 קבוצות במתנה (ישראלית וערבית בלעדיות 🇮🇱)
+            🎁 כולל 2 קבוצות במתנה (ישראלית وערבית בלעדיות 🇮🇱)
         </div>
         <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="vip-amber-btn">
             👑 רכישת קבוצות VIP
@@ -112,24 +112,25 @@ HTML_TEMPLATE = """
     </div>
 
     <div class="container">
+        <!-- الفيديو الأول بالرابط الجديد الخفيف -->
         <div class="video-card">
             <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> תיעוד בלעדי ששבר את הרשת! (2026)</div>
             <div class="video-container">
-                <video id="vid1" src="https://files.catbox.moe/hpf5qe.mp4" playsinline muted></video>
+                <video id="vid1" src="https://files.catbox.moe/st044f.mp4" playsinline muted></video>
                 <div class="locker-overlay" id="overlay1">
                     <div class="lock-icon"><i class="fa-solid fa-lock"></i></div>
                     <div class="lock-title">הסרטון נעול לצפייה</div>
                     <div class="lock-desc" id="status1">שתף בטלגרם 3 פעמים (0/3)</div>
                     <div class="locker-actions">
                         <button class="btn-telegram-share" onclick="handleShare(1, 3, 3)"><i class="fa-brands fa-telegram"></i> שיתוף בטלגרם לפתיחה 🔥</button>
-                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 כוכבים)</a>
+                        <a href="https://t.me/m/7_KEyMT7OTg8" target="_blank" class="btn-vip-buy"><i class="fa-solid fa-crown"></i> קנה גישה VIP מיידית (2500 كוכבים)</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="video-card">
-            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הסרטון שכולם מדברים עליהם (אסור לפספס)</div>
+            <div class="video-title-bar"><i class="fa-solid fa-play-circle"></i> הסרטון שכולם מדברים עליהם (אסור לפسפס)</div>
             <div class="video-container">
                 <video id="vid2" src="https://files.catbox.moe/qwc5h3.mp4" playsinline muted></video>
                 <div class="locker-overlay" id="overlay2">
