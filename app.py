@@ -253,8 +253,8 @@ HTML_PAGE = """
                                     <h3>🔥 קבוצות VIP בלעדיות בטלגרם 🔥</h3>
                                     <blockquote class="vip-quote">
                                         מחיר כניסה: 1000 כוכבי טלגרם 😎
-                                        התוכן כולל: 4,000 סרטונים + 2 קבוצות במתנה (ישראלית وערבית) 🇮🇱
-                                        שלח הודעה כאן לתשלום وלקבלת הקישורים:⬇️✅
+                                        התוכן כולל: 4000 סרטונים + 2 קבוצות במתנה (ישראלית, ערבית) 🇮🇱
+                                        שלח הודעה כאן לתשלום, לקבלת הקישורים:⬇️✅
                                     </blockquote>
                                     <a href="https://t.me/m/s4NRbGi6N2Fk" target="_blank" class="vip-btn">💬 הצטרף עכשיו ל-VIP</a>
                                 </div>
@@ -285,7 +285,7 @@ HTML_PAGE = """
         </div>
 
         <footer>
-            <div class="footer-title">שתף את הפלטפורמה وצור קשר</div>
+            <div class="footer-title">שתף את הפלטפורמה, צור קשר</div>
             <div class="social-buttons">
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">ערוץ ראשי 📱</a>
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">קבוצת VIP ⭐</a>
