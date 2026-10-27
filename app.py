@@ -19,15 +19,15 @@ HTML_PAGE = """
           gtag('config', 'G-0H10SJLG8Y');
         </script>
 
-        <!-- تحسين محركات البحث SEO والكلمات المفتاحية -->
-        <meta name="description" content="אתר הסרטונים החמים בישראל 18+. נשים וצעירות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
-        <meta name="keywords" content="סרטונים חמים בישראל, סרטונים בלעדיים, קבוצות VIP טלגרם, תוכן למבוגרים, סרטונים חדשים, Hot videos Israel">
+        <!-- SEO Metadata -->
+        <meta name="description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
+        <meta name="keywords" content="סרטונים חמים בישראל, נשים ישראליות, קבוצות ישראל, סרטונים 18, סרטונים בלעדיים, קבוצות VIP טלגרם">
         <meta name="robots" content="index, follow">
 
-        <!-- Open Graph Meta Tags for Social Media Preview (Telegram, WhatsApp, Facebook) -->
+        <!-- Open Graph Meta Tags for Social Media Preview -->
         <meta property="og:title" content="סרטונים חמים בישראל">
-        <meta property="og:description" content="אתר הסרטונים החמים בישראל 18+. נשים וצעירות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
-        <meta property="og:image" content="https://i.ibb.co/3s5W9Qz/vip-top.jpg">
+        <meta property="og:description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
+        <meta property="og:image" content="https://files.catbox.moe/c5lwce.jpg">
         <meta property="og:type" content="website">
 
         <!-- Adsterra Popunder Script -->
@@ -224,7 +224,7 @@ HTML_PAGE = """
                         "💎 VIP בלעדי - תוכן למבוגרים בלבד",
                         "🔥 חם מהתנור - בלעדי לחלוטין",
                         "💋 מגע של קסם - מפגשים לוהטים",
-                        "🔥 סודות אפלים - ריגושים אבсолюטיי",
+                        "🔥 סודות אפלים - ריגושים אבסולוטיים",
                         "🌟 אקסטרים - אתגרים לוהטים",
                         "🔥 שיא החום - שיא המתח והריגוש",
                         "💖 מומלץ ביותר - המבוקש ביותר",
@@ -253,8 +253,8 @@ HTML_PAGE = """
                                     <h3>🔥 קבוצות VIP בלעדיות בטלגרם 🔥</h3>
                                     <blockquote class="vip-quote">
                                         מחיר כניסה: 1000 כוכבי טלגרם 😎
-                                        התוכן כולל: 4,000 סרטונים + 2 קבוצות במתנה (ישראלית וערבית) 🇮🇱
-                                        שלח הודעה כאן לתשלום ולקבלת הקישורים:⬇️✅
+                                        התוכן כולל: 4,000 סרטונים + 2 קבוצות במתנה (ישראלית وערבית) 🇮🇱
+                                        שלח הודעה כאן לתשלום وלקבלת הקישורים:⬇️✅
                                     </blockquote>
                                     <a href="https://t.me/m/s4NRbGi6N2Fk" target="_blank" class="vip-btn">💬 הצטרף עכשיו ל-VIP</a>
                                 </div>
@@ -285,7 +285,7 @@ HTML_PAGE = """
         </div>
 
         <footer>
-            <div class="footer-title">שתף את הפלטפורמה וצור קשר</div>
+            <div class="footer-title">שתף את הפלטפורמה وצור קשר</div>
             <div class="social-buttons">
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">ערוץ ראשי 📱</a>
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">קבוצת VIP ⭐</a>
