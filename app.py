@@ -15,13 +15,31 @@ HTML_PAGE = """
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <!-- OneSignal Web SDK -->
+        <!-- OneSignal Web SDK مع تخصيص النصوص للغة العبرية -->
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
           window.OneSignalDeferred = window.OneSignalDeferred || [];
           OneSignalDeferred.push(async function(OneSignal) {
             await OneSignal.init({
               appId: "083248fd-7d06-45bb-b775-112212132b43",
+              notifyButton: {
+                enable: true,
+              },
+              promptOptions: {
+                slidedown: {
+                  prompts: [
+                    {
+                      type: "push",
+                      autoPrompt: true,
+                      text: {
+                        actionMessage: "אנא הרשם לקבלת ההתרעות והעדכונים האחרונים שלנו.",
+                        acceptButton: "הירשם",
+                        cancelButton: "מאוחר יותר"
+                      }
+                    }
+                  ]
+                }
+              }
             });
           });
         </script>
