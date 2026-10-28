@@ -248,19 +248,18 @@ HTML_PAGE = """
                         `);
 
                         if ((i + 1) % 6 === 0 && i < videosList.length - 1) {
-                            document.write(`
-                                <div class="vip-banner-card">
-                                    <h3>🔥 קבוצות VIP בלעדיות בטלגרם 🔥</h3>
-                                    <blockquote class="vip-quote">
-                                        מחיר כניסה: 1000 כוכבי טלגרם 😎
-                                        התוכן כולל: 4000 סרטונים + 2 קבוצות במתנה (ישראלית, ערבית) 🇮🇱
-                                        שלח הודעה כאן לתשלום, לקבלת הקישורים:⬇️✅
-                                    </blockquote>
-                                    <a href="https://t.me/m/s4NRbGi6N2Fk" target="_blank" class="vip-btn">💬 הצטרף עכשיו ל-VIP</a>
-                                </div>
-                            `);
-                        }
-                    }
+    document.write(`
+        <div class="vip-banner-card">
+            <h3>📢 לצפייה בכל התוכן 🔥</h3>
+            <blockquote class="vip-quote">
+                👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
+            </blockquote>
+            <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
+        </div>
+    `);
+}
+
+}
                 </script>
             </div>
 
