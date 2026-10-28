@@ -15,7 +15,7 @@ HTML_PAGE = """
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <!-- OneSignal Web SDK مع تخصيص النصوص للغة العبرية -->
+        <!-- OneSignal Web SDK مع النص بالعبرية -->
         <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
         <script>
           window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -32,7 +32,7 @@ HTML_PAGE = """
                       type: "push",
                       autoPrompt: true,
                       text: {
-                        actionMessage: "אנא הרשם לקבלת ההתרעות והעדכונים האחרונים שלנו.",
+                        actionMessage: "📢 אנא היռשם כדי לקבל את כל הסרטונים החדשים מיד עם יציאתם 🔞",
                         acceptButton: "הירשם",
                         cancelButton: "מאוחר יותר"
                       }
