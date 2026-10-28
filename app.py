@@ -1,6 +1,12 @@
-from flask import Flask
+from flask import Flask, send_from_directory
+import os
 
 app = Flask(__name__)
+
+# مسار خاص لخدمة ملف عامل الخدمة الخاص بـ OneSignal
+@app.route('/OneSignalSDKWorker.js')
+def serve_onesignal_worker():
+    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'OneSignalSDKWorker.js')
 
 HTML_PAGE = """
 <html dir="rtl" lang="he">
@@ -9,6 +15,17 @@ HTML_PAGE = """
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <!-- OneSignal Web SDK -->
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+          window.OneSignalDeferred = window.OneSignalDeferred || [];
+          OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+              appId: "083248fd-7d06-45bb-b775-112212132b43",
+            });
+          });
+        </script>
+
         <!-- Google Analytics Tracking Code -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H10SJLG8Y"></script>
         <script>
@@ -248,18 +265,17 @@ HTML_PAGE = """
                         `);
 
                         if ((i + 1) % 6 === 0 && i < videosList.length - 1) {
-    document.write(`
-        <div class="vip-banner-card">
-            <h3>📢 לצפייה בכל התוכן 🔥</h3>
-            <blockquote class="vip-quote">
-                👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
-            </blockquote>
-            <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
-        </div>
-    `);
-}
-
-}
+                            document.write(`
+                                <div class="vip-banner-card">
+                                    <h3>📢 לצפייה בכל התוכן 🔥</h3>
+                                    <blockquote class="vip-quote">
+                                        👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
+                                    </blockquote>
+                                    <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
+                                </div>
+                            `);
+                        }
+                    }
                 </script>
             </div>
 
