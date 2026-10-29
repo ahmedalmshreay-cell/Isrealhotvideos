@@ -137,33 +137,6 @@ HTML_PAGE = """
             }
             .vip-btn:hover { opacity: 0.9; }
 
-            /* أزرار التنقل */
-            .pagination-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 12px;
-                margin: 20px 0;
-            }
-            .page-btn {
-                background: linear-gradient(90deg, #d97706, #f59e0b);
-                color: white;
-                border: none;
-                padding: 12px 20px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-                transition: transform 0.2s, opacity 0.2s;
-                flex: 1;
-                max-width: 150px;
-                text-align: center;
-            }
-            .page-btn:active { transform: scale(0.96); }
-            .page-btn:disabled { background: #334155; color: #64748b; box-shadow: none; cursor: not-allowed; }
-            .page-info { color: #cbd5e1; font-size: 13px; font-weight: bold; text-align: center; }
-
             .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
             footer { background: #1e1f22; padding: 20px; text-align: center; border-top: 1px solid #2b2d31; margin-top: 40px; }
@@ -204,7 +177,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنר إعلاني علوي 728x90 -->
+            <!-- بنר إעלאני علוי 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -227,7 +200,7 @@ HTML_PAGE = """
             <!-- حاوية عرض الفيديوهات -->
             <div class="videos-grid" id="videosGrid"></div>
 
-            <!-- بنר إعلان قناة التליגראם -->
+            <!-- بنר إעלאן قناة التליגראם -->
             <div class="vip-banner-card">
                 <h3>📢 לצפייה בכל התוכן 🔥</h3>
                 <blockquote class="vip-quote">
@@ -236,14 +209,7 @@ HTML_PAGE = """
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
             </div>
 
-            <!-- أزرار التنقل بين الصفحات -->
-            <div class="pagination-container" style="direction: ltr;">
-                <button class="page-btn" id="prevBtn" onclick="changePage(-1)">⬅ עמוד קודם</button>
-                <span class="page-info" id="pageInfo" style="direction: rtl;">עמוד 1</span>
-                <button class="page-btn" id="nextBtn" onclick="changePage(1)">עמוד הבא ➔</button>
-            </div>
-
-            <!-- إעלانات -->
+            <!-- إעלאנות -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -273,7 +239,7 @@ HTML_PAGE = """
             </div>
             
             <div class="seo-text">
-                אתר הסרטונים החמים בישראל מציג הדלפות טלגרם 18+, קבוצות VIP, סרטונים ללא צנזורה ותוכן בלעדי לצפייה ישירה.
+                אתר הסרטונים החמים בישראל מציג קטעים בלעדיים, הדלפות VIP, תוכן ללא צנזורה וסרטונים 18+ המתעדכנים יום יום.
             </div>
 
             <div class="copyright">
@@ -294,7 +260,6 @@ HTML_PAGE = """
                 "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
             ];
             
-            // استبدال ملف GIF بصورة ثابته لضمان التوافق مع المشغل
             const postersList = [
                 "https://files.catbox.moe/3nqx43.png",
                 "https://files.catbox.moe/4fond1.png",
@@ -314,7 +279,7 @@ HTML_PAGE = """
                 "https://files.catbox.moe/n43ov2.jpg",
                 "https://files.catbox.moe/qyjbj3.jpg",
                 "https://files.catbox.moe/3p8b8i.jpg",
-                "https://files.catbox.moe/ppusf6.jpg", // استبدال الـ gif برابط صورة ثابتة
+                "https://files.catbox.moe/ppusf6.jpg",
                 "https://files.catbox.moe/ppusf6.jpg",
                 "https://files.catbox.moe/hl9ojf.jpg",
                 "https://files.catbox.moe/ijiwhn.jpg",
@@ -389,44 +354,25 @@ HTML_PAGE = """
                 "3.1K", "920", "4.0K", "1.3K", "2.7K"
             ];
 
-            let currentPage = 1;
-            const itemsPerPage = 6;
-            const totalPages = Math.ceil(videosList.length / itemsPerPage);
-
             function renderVideos() {
                 const grid = document.getElementById("videosGrid");
                 grid.innerHTML = "";
 
-                const start = (currentPage - 1) * itemsPerPage;
-                const end = start + itemsPerPage;
-                const pageVideos = videosList.slice(start, end);
-
-                pageVideos.forEach((vName, index) => {
-                    const actualIndex = start + index;
-                    const vTitle = titlesList[actualIndex];
-                    const vViews = viewsList[actualIndex];
-                    const vPoster = postersList[actualIndex];
+                videosList.forEach((vName, index) => {
+                    const vTitle = titlesList[index];
+                    const vViews = viewsList[index];
+                    const vPoster = postersList[index];
 
                     const card = `
                         <div class="video-card" data-title="${vTitle}">
                             <h3>${vTitle}</h3>
                             <div class="video-views">👁️ ${vViews} צפיות</div>
-                            <video preload="metadata" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                            <video preload="none" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                             <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                         </div>
                     `;
                     grid.innerHTML += card;
                 });
-
-                document.getElementById("pageInfo").innerText = `עמוד ${currentPage} מתוך ${totalPages}`;
-                document.getElementById("prevBtn").disabled = (currentPage === 1);
-                document.getElementById("nextBtn").disabled = (currentPage === totalPages);
-            }
-
-            function changePage(direction) {
-                currentPage += direction;
-                renderVideos();
-                document.getElementById("videosSectionTitle").scrollIntoView({ behavior: 'smooth' });
             }
 
             function openNav() { document.getElementById("mySidebar").style.width = "220px"; }
@@ -454,7 +400,7 @@ HTML_PAGE = """
                             <div class="video-card" data-title="${vTitle}">
                                 <h3>${vTitle}</h3>
                                 <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="metadata" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <video preload="none" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                                 <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                             </div>
                         `;
@@ -469,9 +415,9 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمت المشاركة بنجاح');
+                        console.log('تمת المشاركة بنجاح');
                     }).catch((error) => {
-                        console.log('خطأ في المشاركة', error);
+                        console.log('خطא في المشاركة', error);
                     });
                 } else {
                     navigator.clipboard.writeText(window.location.href);
