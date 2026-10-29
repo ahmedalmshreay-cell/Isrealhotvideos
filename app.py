@@ -97,6 +97,7 @@ HTML_PAGE = """
                 border-radius: 10px;
                 text-align: center;
                 box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+                margin-top: 10px;
             }
             .vip-banner-card h3 {
                 color: #f59e0b;
@@ -129,6 +130,33 @@ HTML_PAGE = """
                 font-weight: bold;
             }
             .vip-btn:hover { opacity: 0.9; }
+
+            /* أزرار التنقل */
+            .pagination-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                margin: 20px 0;
+            }
+            .page-btn {
+                background: linear-gradient(90deg, #d97706, #f59e0b);
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+                transition: transform 0.2s, opacity 0.2s;
+                flex: 1;
+                max-width: 150px;
+                text-align: center;
+            }
+            .page-btn:active { transform: scale(0.96); }
+            .page-btn:disabled { background: #334155; color: #64748b; box-shadow: none; cursor: not-allowed; }
+            .page-info { color: #cbd5e1; font-size: 13px; font-weight: bold; text-align: center; }
 
             .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
@@ -187,103 +215,28 @@ HTML_PAGE = """
                 <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="חפש סרטון או תוכן...">
             </div>
 
-            <h2 class="section-title">🔥 סרטונים חמים חדשים</h2>
+            <h2 class="section-title" id="videosSectionTitle">🔥 סרטונים חמים חדשים</h2>
             
-            <div class="videos-grid" id="videosGrid">
-                <script>
-                    const videosList = [
-                        "in681v.MOV", "yo3jfj.mp4",
-                        "m172k7.mp4", "qz3hn5.mp4", "02zr2u.MOV", "5fprnb.mp4", 
-                        "ptdvrz.mp4", "pnngrz.mp4", "d9o74w.MP4", "okhfjl.mp4", 
-                        "69v3q4.MP4", "plsmm7.mp4", "1939vy.MP4",
-                        "oo7zyt.MP4", "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
-                        "wio4kl.mp4", "vo29gf.mp4", "qseq0i.mp4", "762n5t.mp4", "6qs6t8.mp4", "xtrtpd.mp4", 
-                        "xovx5v.mp4", "gca6vk.mp4", "sjj6dd.mp4", "vzginq.mp4", "lwbdy1.mp4", "o36fln.mp4", 
-                        "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
-                        "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
-                    ];
-                    
-                    const titlesList = [
-                        "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
-                        "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
-                        "🔥💣 הדלפה לוהטת במיוחד - צפו לפני שהיא נמחקת!",
-                        "💋✨ לילה מטורף בתל אביב - תוכן VIP בלעדי 18+",
-                        "🚨🔞 סרטון חם ששבר את הרשת - ללא צנזורה",
-                        "💖🔥 מפגש רומנטי חם וסודי ביותר - צפייה חובה",
-                        "⚡📱 קטעים מוצנעים שנחשפו לראשונה - מטורף!",
-                        "🔥💎 אקסקלוסיבי לחברים: רגעים חמים ללא פילטרים",
-                        "🌟💋 סרטון סודי מהקבוצה הסגורה - מומלץ ביותר",
-                        "🚨🔥 טירוף חושים מוחלט - הדלפה חדשה מהשטח",
-                        "💖🔒 רגעים אינטימיים מטורפים - בלעדי לאתר",
-                        "🔥⚡ פצצת שפנים - צפיות שיא בטלגרם 🔞",
-                        "💋💥 משהו חם מתרחש כאן - לצפייה ישירה HD",
-                        "📼🔒 קטעי וידאו אמיתיים ממצלמות אבטחה - סודי ביותר",
-                        "🚨🔥 בלעדי ולוהט במיוחד - חובה צפייה 18+",
-                        "💋💥 סרטון סודי ומטורף שעושה רושם רציני",
-                        "🔥💎 אקסקלוסיבי ברשת - מראות קשים ומרגשים",
-                        "⚡🔥 פצצת הערב - צפו לפני מחיקה!",
-                        "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
-                        "💖 לוהט במיוחד - בלעדי HD",
-                        "🔥 סודי ביותר - קטעים אסורים",
-                        "⚡ בלעדי באתר - ללא צנזורה 18+",
-                        "💎 חושני ומרגש - קטעים מיוחדים",
-                        "🔥 מיוחד למבוגרים - קסם המזרח התיכון",
-                        "💋 חדש וחם - יצירת מופת חזותית",
-                        "🔥 אקסקלוסיבי - שידור חי לוהט",
-                        "🌟 בלעדי ברשת - הרפתקאות לילה",
-                        "🔥 שערורייה - סרטונים אסורים",
-                        "💖 אהבה אסורה - סודות אפלים",
-                        "🔥 טירוף חושים - פיצוץ חושים אמיתי",
-                        "⚡ פצצת שסי - קטעים יוצאי דופן",
-                        "🔥 סרטון מטורף - הנאה ללא גבולות",
-                        "💎 VIP בלעדי - תוכן למבוגרים בלבד",
-                        "🔥 חם מהתנור - בלעדי לחלוטין",
-                        "💋 מגע של קסם - מפגשים לוהטים",
-                        "🔥 סודות אפלים - ריגושים אבסולוטיים",
-                        "🌟 אקסטרים - אתגרים לוהטים",
-                        "🔥 שיא החום - שיא המתח והריגוש",
-                        "💖 מומלץ ביותר - המבוקש ביותר",
-                        "🔥 בלעדי לחברי האתר - לילה מיוחד"
-                    ];
+            <!-- حاوية عرض الفيديوهات -->
+            <div class="videos-grid" id="videosGrid"></div>
 
-                    const viewsList = [
-                        "7.4K", "8.9K", 
-                        "9.6K", "11.2K", "10.4K", "8.1K", "12.5K", "9.3K", "14.1K", "7.8K", "10.9K", "13.2K", "8.7K",
-                        "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", 
-                        "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", 
-                        "3.1K", "920", "4.0K", "1.3K", "2.7K"
-                    ];
-
-                    for(let i = 0; i < videosList.length; i++) {
-                        let vName = videosList[i];
-                        let vTitle = titlesList[i];
-                        let vViews = viewsList[i];
-                        
-                        document.write(`
-                            <div class="video-card" data-title="${vTitle}">
-                                <h3>${vTitle}</h3>
-                                <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
-                                <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
-                            </div>
-                        `);
-
-                        if ((i + 1) % 6 === 0 && i < videosList.length - 1) {
-                            document.write(`
-                                <div class="vip-banner-card">
-                                    <h3>📢 לצפייה בכל התוכן 🔥</h3>
-                                    <blockquote class="vip-quote">
-                                        👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
-                                    </blockquote>
-                                    <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
-                                </div>
-                            `);
-                        }
-                    }
-                </script>
+            <!-- بنר إعلان قناة التליגرام -->
+            <div class="vip-banner-card">
+                <h3>📢 לצפייה בכל התוכן 🔥</h3>
+                <blockquote class="vip-quote">
+                    👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
+                </blockquote>
+                <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
             </div>
 
-            <!-- مكان عرض البانر الأصلي (Native Banner) و بنر 300x250 -->
+            <!-- أزرار التنقل بالاتجاه الصحيح -->
+            <div class="pagination-container" style="direction: ltr;">
+                <button class="page-btn" id="prevBtn" onclick="changePage(-1)">⬅ עמוד קודם</button>
+                <span class="page-info" id="pageInfo" style="direction: rtl;">עמוד 1</span>
+                <button class="page-btn" id="nextBtn" onclick="changePage(1)">עמוד הבא ➔</button>
+            </div>
+
+            <!-- إعلانات -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -317,19 +270,136 @@ HTML_PAGE = """
         </footer>
 
         <script>
+            const videosList = [
+                "in681v.MOV", "yo3jfj.mp4",
+                "m172k7.mp4", "qz3hn5.mp4", "02zr2u.MOV", "5fprnb.mp4", 
+                "ptdvrz.mp4", "pnngrz.mp4", "d9o74w.MP4", "okhfjl.mp4", 
+                "69v3q4.MP4", "plsmm7.mp4", "1939vy.MP4",
+                "oo7zyt.MP4", "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
+                "wio4kl.mp4", "vo29gf.mp4", "qseq0i.mp4", "762n5t.mp4", "6qs6t8.mp4", "xtrtpd.mp4", 
+                "xovx5v.mp4", "gca6vk.mp4", "sjj6dd.mp4", "vzginq.mp4", "lwbdy1.mp4", "o36fln.mp4", 
+                "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
+                "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
+            ];
+            
+            const titlesList = [
+                "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
+                "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
+                "🔥💣 הדלפה לוהטת במיוחד - צפו לפני שהיא נמחקת!",
+                "💋✨ לילה מטורף בתל אביב - תוכן VIP בלעדי 18+",
+                "🚨🔞 סרטון חם ששבר את הרשת - ללא צנזורה",
+                "💖🔥 מפגש רומנטי חם וסודי ביותר - צפייה חובה",
+                "⚡📱 קטעים מוצנעים שנחשפו לראשונה - מטורף!",
+                "🔥💎 אקסקלוסיבי לחברים: רגעים חמים ללא פילטרים",
+                "🌟💋 סרטון סודי מהקבוצה הסגורה - מומלץ ביותר",
+                "🚨🔥 טירוף חושים מוחלט - הדלפה חדשה מהשטח",
+                "💖🔒 רגעים אינטימיים מטורפים - בלעדי לאתר",
+                "🔥⚡ פצצת שפנים - צפיות שיא בטלגרם 🔞",
+                "💋💥 משהו חם מתרחש כאן - לצפייה ישירה HD",
+                "📼🔒 קטעי וידאו אמיתיים ממצלמות אבטחה - סודי ביותר",
+                "🚨🔥 בלעדי ולוהט במיוחד - חובה צפייה 18+",
+                "💋💥 סרטון סודי ומטורף שעושה רושם רציני",
+                "🔥💎 אקסקלוסיבי ברשת - מראות קשים ומרגשים",
+                "⚡🔥 פצצת הערב - צפו לפני מחיקה!",
+                "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
+                "💖 לוהט במיוחד - בלעדי HD",
+                "🔥 סודי ביותר - קטעים אסורים",
+                "⚡ בלעדי באתר - ללא צנזורה 18+",
+                "💎 חושני ומרגש - קטעים מיוחדים",
+                "🔥 מיוחד למבוגרים - קסם המזרח התיכון",
+                "💋 חדש וחם - יצירת מופת חזותית",
+                "🔥 אקסקלוסיבי - שידור חי לוהט",
+                "🌟 בלעדי ברשת - הרפתקאות לילה",
+                "🔥 שערורייה - סרטונים אסורים",
+                "💖 אהבה אסורה - סודות אפלים",
+                "🔥 טירוף חושים - פיצוץ חושים אמיתי",
+                "⚡ פצצת שסי - קטעים יוצאי דופן",
+                "🔥 סרטון מטורף - הנאה ללא גבולות",
+                "💎 VIP בלעדי - תוכן למבוגרים בלבד",
+                "🔥 חם מהתנור - בלעדי לחלוטין",
+                "💋 מגע של קסם - מפגשים לוהטים",
+                "🔥 סודות אפלים - ריגושים אבסולוטיים",
+                "🌟 אקסטרים - אתגרים לוהטים",
+                "🔥 שיא החום - שיא המתח והריגוש",
+                "💖 מומלץ ביותר - המבוקש ביותר",
+                "🔥 בלעדי לחברי האתר - לילה מיוחד"
+            ];
+
+            const viewsList = [
+                "7.4K", "8.9K", 
+                "9.6K", "11.2K", "10.4K", "8.1K", "12.5K", "9.3K", "14.1K", "7.8K", "10.9K", "13.2K", "8.7K",
+                "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", 
+                "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", 
+                "3.1K", "920", "4.0K", "1.3K", "2.7K"
+            ];
+
+            let currentPage = 1;
+            const itemsPerPage = 6;
+            const totalPages = Math.ceil(videosList.length / itemsPerPage);
+
+            function renderVideos() {
+                const grid = document.getElementById("videosGrid");
+                grid.innerHTML = "";
+
+                const start = (currentPage - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+                const pageVideos = videosList.slice(start, end);
+
+                pageVideos.forEach((vName, index) => {
+                    const actualIndex = start + index;
+                    const vTitle = titlesList[actualIndex];
+                    const vViews = viewsList[actualIndex];
+
+                    const card = `
+                        <div class="video-card" data-title="${vTitle}">
+                            <h3>${vTitle}</h3>
+                            <div class="video-views">👁️ ${vViews} צפיות</div>
+                            <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                            <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
+                        </div>
+                    `;
+                    grid.innerHTML += card;
+                });
+
+                document.getElementById("pageInfo").innerText = `עמוד ${currentPage} מתוך ${totalPages}`;
+                document.getElementById("prevBtn").disabled = (currentPage === 1);
+                document.getElementById("nextBtn").disabled = (currentPage === totalPages);
+            }
+
+            function changePage(direction) {
+                currentPage += direction;
+                renderVideos();
+                document.getElementById("videosSectionTitle").scrollIntoView({ behavior: 'smooth' });
+            }
+
             function openNav() { document.getElementById("mySidebar").style.width = "220px"; }
             function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
             
             function searchVideos() {
                 let input = document.getElementById('searchInput').value.toLowerCase();
-                let cards = document.getElementsByClassName('video-card');
+                if (input.trim() === "") {
+                    renderVideos();
+                    return;
+                }
                 
-                for (let i = 0; i < cards.length; i++) {
-                    let title = cards[i].getAttribute('data-title').toLowerCase();
+                const grid = document.getElementById("videosGrid");
+                grid.innerHTML = "";
+                
+                for (let i = 0; i < videosList.length; i++) {
+                    let title = titlesList[i].toLowerCase();
                     if (title.includes(input)) {
-                        cards[i].style.display = "";
-                    } else {
-                        cards[i].style.display = "none";
+                        let vName = videosList[i];
+                        let vTitle = titlesList[i];
+                        let vViews = viewsList[i];
+                        
+                        grid.innerHTML += `
+                            <div class="video-card" data-title="${vTitle}">
+                                <h3>${vTitle}</h3>
+                                <div class="video-views">👁️ ${vViews} צפיות</div>
+                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
+                            </div>
+                        `;
                     }
                 }
             }
@@ -341,7 +411,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمت المشاركة بنجاح');
+                        console.log('تمת المشاركة بنجاح');
                     }).catch((error) => {
                         console.log('خطأ في المشاركة', error);
                     });
@@ -350,6 +420,8 @@ HTML_PAGE = """
                     alert('קישור האתר הועתק ללוח!');
                 }
             }
+
+            renderVideos();
         </script>
     </body>
 </html>
