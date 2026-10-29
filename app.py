@@ -198,7 +198,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنر إعلاني علوي 728x90 -->
+            <!-- بنר إعلاني علوي 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -360,8 +360,8 @@ HTML_PAGE = """
                         <div class="video-card" data-title="${vTitle}">
                             <h3>${vTitle}</h3>
                             <div class="video-views">👁️ ${vViews} צפיות</div>
-                            <video preload="none" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
-                            <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
+                            <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.0,1.0"></video>
+                            <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                         </div>
                     `;
                     grid.innerHTML += card;
@@ -402,8 +402,8 @@ HTML_PAGE = """
                             <div class="video-card" data-title="${vTitle}">
                                 <h3>${vTitle}</h3>
                                 <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="none" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
-                                <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
+                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.0,1.0"></video>
+                                <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                             </div>
                         `;
                     }
@@ -417,7 +417,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمת المشاركة بنגاح');
+                        console.log('تمت المشاركة بنجاح');
                     }).catch((error) => {
                         console.log('خطأ في المشاركة', error);
                     });
