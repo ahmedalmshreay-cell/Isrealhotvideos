@@ -22,7 +22,7 @@ HTML_PAGE = """
 
         <!-- SEO Metadata -->
         <meta name="description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
-        <meta name="keywords" content="סרטונים חמים בישראל, נשים ישראליות, קבוצות ישראל, סרטונים 18, סרטונים בלעדיים, קבוצות VIP טלגרם">
+        <meta name="keywords" content="סרטונים 18, סרטונים חמים בישראל, הדלפות VIP, נשים ישראליות 18, קבוצות VIP טלגרם, תוכן למבוגרים בלבד, סרטונים בלעדיים, מצלמות אבטחה, קטעים ללא צנזורה, הדלפות טלגרם, וידאו חם HD, קבוצות ישראליות סודיות">
         <meta name="robots" content="index, follow">
 
         <!-- Open Graph Meta Tags for Social Media Preview -->
@@ -166,6 +166,7 @@ HTML_PAGE = """
             .btn { padding: 7px 14px; text-decoration: none; border-radius: 6px; font-size: 11px; font-weight: bold; color: white; }
             .telegram-all { background: #0088cc; }
             .copyright { margin-top: 15px; font-size: 10px; color: #6b7280; }
+            .seo-text { font-size: 11px; color: #475569; text-align: right; margin-top: 15px; line-height: 1.5; }
         </style>
         
         <!-- Adsterra SocialBar Script -->
@@ -220,7 +221,7 @@ HTML_PAGE = """
             <!-- حاوية عرض الفيديوهات -->
             <div class="videos-grid" id="videosGrid"></div>
 
-            <!-- بنר إعلان قناة التליגرام -->
+            <!-- بنר إعلان قناة التליגראם -->
             <div class="vip-banner-card">
                 <h3>📢 לצפייה בכל התוכן 🔥</h3>
                 <blockquote class="vip-quote">
@@ -229,7 +230,7 @@ HTML_PAGE = """
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
             </div>
 
-            <!-- أزرار التنقل بالاتجاه الصحيح -->
+            <!-- أزرار التنقل بين الصفحات -->
             <div class="pagination-container" style="direction: ltr;">
                 <button class="page-btn" id="prevBtn" onclick="changePage(-1)">⬅ עמוד קודם</button>
                 <span class="page-info" id="pageInfo" style="direction: rtl;">עמוד 1</span>
@@ -264,6 +265,11 @@ HTML_PAGE = """
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">עדכונים חמים 🔥</a>
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">ערוץ רשמי 🇮🇱</a>
             </div>
+            
+            <div class="seo-text">
+                אתר הסרטונים החמים בישראל מציג קטעים בלעדיים, הדלפות VIP, תוכן ללא צנזורה וסרטונים 18+ המתעדכנים יום יום.
+            </div>
+
             <div class="copyright">
                 כל הזכויות שמורות © 2026 | סרטונים חמים בישראל
             </div>
@@ -354,7 +360,7 @@ HTML_PAGE = """
                         <div class="video-card" data-title="${vTitle}">
                             <h3>${vTitle}</h3>
                             <div class="video-views">👁️ ${vViews} צפיות</div>
-                            <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                            <video preload="none" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                             <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
                         </div>
                     `;
@@ -396,7 +402,7 @@ HTML_PAGE = """
                             <div class="video-card" data-title="${vTitle}">
                                 <h3>${vTitle}</h3>
                                 <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <video preload="none" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                                 <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
                             </div>
                         `;
@@ -411,7 +417,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمת المشاركة بنجاح');
+                        console.log('تمת المشاركة بنגاح');
                     }).catch((error) => {
                         console.log('خطأ في المشاركة', error);
                     });
