@@ -1,12 +1,7 @@
-from flask import Flask, send_from_directory
+from flask import Flask
 import os
 
 app = Flask(__name__)
-
-# مسار خاص لخدمة ملف عامل الخدمة الخاص بـ OneSignal
-@app.route('/OneSignalSDKWorker.js')
-def serve_onesignal_worker():
-    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'OneSignalSDKWorker.js')
 
 HTML_PAGE = """
 <html dir="rtl" lang="he">
@@ -14,35 +9,6 @@ HTML_PAGE = """
         <title>סרטונים חמים בישראל</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- OneSignal Web SDK مع النص بالعبرية -->
-        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-        <script>
-          window.OneSignalDeferred = window.OneSignalDeferred || [];
-          OneSignalDeferred.push(async function(OneSignal) {
-            await OneSignal.init({
-              appId: "083248fd-7d06-45bb-b775-112212132b43",
-              notifyButton: {
-                enable: true,
-              },
-              promptOptions: {
-                slidedown: {
-                  prompts: [
-                    {
-                      type: "push",
-                      autoPrompt: true,
-                      text: {
-                        actionMessage: "📢 אנא היռשם כדי לקבל את כל הסרטונים החדשים מיד עם יציאתם 🔞",
-                        acceptButton: "הירשם",
-                        cancelButton: "מאוחר יותר"
-                      }
-                    }
-                  ]
-                }
-              }
-            });
-          });
-        </script>
 
         <!-- Google Analytics Tracking Code -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H10SJLG8Y"></script>
@@ -203,7 +169,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنر إعلاني علوي 728x90 -->
+            <!-- بنר إעלני علוי 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -297,7 +263,7 @@ HTML_PAGE = """
                 </script>
             </div>
 
-            <!-- مكان عرض البانر الأصلي (Native Banner) و بنر 300x250 -->
+            <!-- مكان عرض הבאנר המקורי (Native Banner) ו بنר 300x250 -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -355,7 +321,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمت المشاركة بنجاح');
+                        console.log('تمت المشاركة بنגاح');
                     }).catch((error) => {
                         console.log('خطأ في المشاركة', error);
                     });
