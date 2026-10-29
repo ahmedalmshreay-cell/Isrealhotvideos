@@ -169,7 +169,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنר إעלני علוי 728x90 -->
+            <!-- بنر إعلاني علوي 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -192,8 +192,11 @@ HTML_PAGE = """
             <div class="videos-grid" id="videosGrid">
                 <script>
                     const videosList = [
-                        "in681v.MOV", "yo3jfj.mp4", "oo7zyt.MP4",
-                        "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
+                        "in681v.MOV", "yo3jfj.mp4",
+                        "m172k7.mp4", "qz3hn5.mp4", "02zr2u.MOV", "5fprnb.mp4", 
+                        "ptdvrz.mp4", "pnngrz.mp4", "d9o74w.MP4", "okhfjl.mp4", 
+                        "69v3q4.MP4", "plsmm7.mp4", "1939vy.MP4",
+                        "oo7zyt.MP4", "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
                         "wio4kl.mp4", "vo29gf.mp4", "qseq0i.mp4", "762n5t.mp4", "6qs6t8.mp4", "xtrtpd.mp4", 
                         "xovx5v.mp4", "gca6vk.mp4", "sjj6dd.mp4", "vzginq.mp4", "lwbdy1.mp4", "o36fln.mp4", 
                         "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
@@ -203,6 +206,17 @@ HTML_PAGE = """
                     const titlesList = [
                         "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
                         "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
+                        "🔥💣 הדלפה לוהטת במיוחד - צפו לפני שהיא נמחקת!",
+                        "💋✨ לילה מטורף בתל אביב - תוכן VIP בלעדי 18+",
+                        "🚨🔞 סרטון חם ששבר את הרשת - ללא צנזורה",
+                        "💖🔥 מפגש רומנטי חם וסודי ביותר - צפייה חובה",
+                        "⚡📱 קטעים מוצנעים שנחשפו לראשונה - מטורף!",
+                        "🔥💎 אקסקלוסיבי לחברים: רגעים חמים ללא פילטרים",
+                        "🌟💋 סרטון סודי מהקבוצה הסגורה - מומלץ ביותר",
+                        "🚨🔥 טירוף חושים מוחלט - הדלפה חדשה מהשטח",
+                        "💖🔒 רגעים אינטימיים מטורפים - בלעדי לאתר",
+                        "🔥⚡ פצצת שפנים - צפיות שיא בטלגרם 🔞",
+                        "💋💥 משהו חם מתרחש כאן - לצפייה ישירה HD",
                         "📼🔒 קטעי וידאו אמיתיים ממצלמות אבטחה - סודי ביותר",
                         "🚨🔥 בלעדי ולוהט במיוחד - חובה צפייה 18+",
                         "💋💥 סרטון סודי ומטורף שעושה רושם רציני",
@@ -232,7 +246,13 @@ HTML_PAGE = """
                         "🔥 בלעדי לחברי האתר - לילה מיוחד"
                     ];
 
-                    const viewsList = ["7.4K", "8.9K", "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", "3.1K", "920", "4.0K", "1.3K", "2.7K"];
+                    const viewsList = [
+                        "7.4K", "8.9K", 
+                        "9.6K", "11.2K", "10.4K", "8.1K", "12.5K", "9.3K", "14.1K", "7.8K", "10.9K", "13.2K", "8.7K",
+                        "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", 
+                        "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", 
+                        "3.1K", "920", "4.0K", "1.3K", "2.7K"
+                    ];
 
                     for(let i = 0; i < videosList.length; i++) {
                         let vName = videosList[i];
@@ -263,7 +283,7 @@ HTML_PAGE = """
                 </script>
             </div>
 
-            <!-- مكان عرض הבאנר המקורי (Native Banner) ו بنר 300x250 -->
+            <!-- مكان عرض البانر الأصلي (Native Banner) و بنر 300x250 -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -321,7 +341,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمت المشاركة بنגاح');
+                        console.log('تمت المشاركة بنجاح');
                     }).catch((error) => {
                         console.log('خطأ في المشاركة', error);
                     });
