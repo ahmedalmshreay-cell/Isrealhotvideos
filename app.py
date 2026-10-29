@@ -103,7 +103,7 @@ HTML_PAGE = """
                 border-radius: 10px;
                 text-align: center;
                 box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-                margin-top: 10px;
+                margin: 10px 0;
             }
             .vip-banner-card h3 {
                 color: #f59e0b;
@@ -137,7 +137,7 @@ HTML_PAGE = """
             }
             .vip-btn:hover { opacity: 0.9; }
 
-            .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
+            .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; grid-column: span 2; }
 
             footer { background: #1e1f22; padding: 20px; text-align: center; border-top: 1px solid #2b2d31; margin-top: 40px; }
             .footer-title { font-size: 13px; color: #b5bac1; margin-bottom: 12px; font-weight: bold; }
@@ -177,7 +177,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنר إעלאני علוי 728x90 -->
+            <!-- بنר إعلاني علوي 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -197,19 +197,10 @@ HTML_PAGE = """
 
             <h2 class="section-title" id="videosSectionTitle">🔥 סרטונים חמים חדשים</h2>
             
-            <!-- حاوية عرض الفيديوهات -->
+            <!-- حاوية عرض הפסודיוהות -->
             <div class="videos-grid" id="videosGrid"></div>
 
-            <!-- بنר إעלאן قناة التליגראם -->
-            <div class="vip-banner-card">
-                <h3>📢 לצפייה בכל התוכן 🔥</h3>
-                <blockquote class="vip-quote">
-                    👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
-                </blockquote>
-                <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
-            </div>
-
-            <!-- إעלאנות -->
+            <!-- إعلانات إضافية قبل الفوتر -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -354,6 +345,16 @@ HTML_PAGE = """
                 "3.1K", "920", "4.0K", "1.3K", "2.7K"
             ];
 
+            const vipBannerHTML = `
+                <div class="vip-banner-card">
+                    <h3>📢 לצפייה בכל התוכן 🔥</h3>
+                    <blockquote class="vip-quote">
+                        👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
+                    </blockquote>
+                    <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
+                </div>
+            `;
+
             function renderVideos() {
                 const grid = document.getElementById("videosGrid");
                 grid.innerHTML = "";
@@ -372,6 +373,11 @@ HTML_PAGE = """
                         </div>
                     `;
                     grid.innerHTML += card;
+
+                    // إضافة بنר التליجرام بعد كل 6 فيديوهات
+                    if ((index + 1) % 6 === 0) {
+                        grid.innerHTML += vipBannerHTML;
+                    }
                 });
             }
 
@@ -388,9 +394,11 @@ HTML_PAGE = """
                 const grid = document.getElementById("videosGrid");
                 grid.innerHTML = "";
                 
+                let matchCount = 0;
                 for (let i = 0; i < videosList.length; i++) {
                     let title = titlesList[i].toLowerCase();
                     if (title.includes(input)) {
+                        matchCount++;
                         let vName = videosList[i];
                         let vTitle = titlesList[i];
                         let vViews = viewsList[i];
@@ -404,6 +412,10 @@ HTML_PAGE = """
                                 <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                             </div>
                         `;
+
+                        if (matchCount % 6 === 0) {
+                            grid.innerHTML += vipBannerHTML;
+                        }
                     }
                 }
             }
@@ -415,7 +427,7 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('تمת المشاركة بنجاح');
+                        console.log('تمת المشاركة بنגاح');
                     }).catch((error) => {
                         console.log('خطא في المشاركة', error);
                     });
