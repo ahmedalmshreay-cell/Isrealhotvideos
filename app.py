@@ -28,7 +28,6 @@ HTML_PAGE = """
         <!-- Open Graph Meta Tags for Social Media Preview -->
         <meta property="og:title" content="סרטונים חמים בישראל">
         <meta property="og:description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
-        <meta property="og:image" content="https://files.catbox.moe/c5lwce.jpg">
         <meta property="og:type" content="website">
 
         <!-- Adsterra Popunder Script -->
@@ -250,49 +249,6 @@ HTML_PAGE = """
                 "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
                 "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
             ];
-            
-            const postersList = [
-                "https://files.catbox.moe/3nqx43.png",
-                "https://files.catbox.moe/4fond1.png",
-                "https://files.catbox.moe/1vabkj.jpg",
-                "https://files.catbox.moe/zjpinl.jpg",
-                "https://files.catbox.moe/0fqkeu.jpg",
-                "https://files.catbox.moe/ehczmi.jpg",
-                "https://files.catbox.moe/6oa40p.jpg",
-                "https://files.catbox.moe/icojvr.jpg",
-                "https://files.catbox.moe/ze8ash.jpg",
-                "https://files.catbox.moe/qi92pe.jpg",
-                "https://files.catbox.moe/xhc5dy.jpg",
-                "https://files.catbox.moe/g5v4th.jpg",
-                "https://files.catbox.moe/nr1a0q.jpg",
-                "https://files.catbox.moe/fn7bue.jpg",
-                "https://files.catbox.moe/iktep3.jpg",
-                "https://files.catbox.moe/n43ov2.jpg",
-                "https://files.catbox.moe/qyjbj3.jpg",
-                "https://files.catbox.moe/3p8b8i.jpg",
-                "https://files.catbox.moe/ppusf6.jpg",
-                "https://files.catbox.moe/ppusf6.jpg",
-                "https://files.catbox.moe/hl9ojf.jpg",
-                "https://files.catbox.moe/ijiwhn.jpg",
-                "https://files.catbox.moe/9us7fp.jpg",
-                "https://files.catbox.moe/r4z0on.jpg",
-                "https://files.catbox.moe/sl5ifg.jpg",
-                "https://files.catbox.moe/af3lsk.jpg",
-                "https://files.catbox.moe/b1284l.jpg",
-                "https://files.catbox.moe/0grcov.jpg",
-                "https://files.catbox.moe/znn3fh.jpg",
-                "https://files.catbox.moe/3q4h20.jpg",
-                "https://files.catbox.moe/5hyb40.jpg",
-                "https://files.catbox.moe/wmguul.jpg",
-                "https://files.catbox.moe/tbox7e.jpg",
-                "https://files.catbox.moe/xv16kr.jpg",
-                "https://files.catbox.moe/8pn4i4.jpg",
-                "https://files.catbox.moe/qholif.jpg",
-                "https://files.catbox.moe/ihg44e.jpg",
-                "https://files.catbox.moe/r4z0on.jpg",
-                "https://files.catbox.moe/rc20rn.jpg",
-                "https://files.catbox.moe/r0fe4m.jpg"
-            ];
 
             const titlesList = [
                 "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
@@ -362,13 +318,12 @@ HTML_PAGE = """
                 videosList.forEach((vName, index) => {
                     const vTitle = titlesList[index];
                     const vViews = viewsList[index];
-                    const vPoster = postersList[index];
 
                     const card = `
                         <div class="video-card" data-title="${vTitle}">
                             <h3>${vTitle}</h3>
                             <div class="video-views">👁️ ${vViews} צפיות</div>
-                            <video preload="none" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                            <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                             <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                         </div>
                     `;
@@ -402,13 +357,12 @@ HTML_PAGE = """
                         let vName = videosList[i];
                         let vTitle = titlesList[i];
                         let vViews = viewsList[i];
-                        let vPoster = postersList[i];
                         
                         grid.innerHTML += `
                             <div class="video-card" data-title="${vTitle}">
                                 <h3>${vTitle}</h3>
                                 <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="none" poster="${vPoster}" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
                                 <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
                             </div>
                         `;
