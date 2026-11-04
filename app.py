@@ -1,5 +1,4 @@
 from flask import Flask
-import os
 
 app = Flask(__name__)
 
@@ -9,7 +8,7 @@ HTML_PAGE = """
         <title>סרטונים חמים בישראל</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        
         <!-- Google Analytics Tracking Code -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0H10SJLG8Y"></script>
         <script>
@@ -22,12 +21,13 @@ HTML_PAGE = """
 
         <!-- SEO Metadata -->
         <meta name="description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
-        <meta name="keywords" content="סרטונים 18, סרטונים חמים בישראל, הדלפות VIP, נשים ישראליות 18, קבוצות VIP טלגרם, תוכן למבוגרים בלבד, סרטונים בלעדיים, מצלמות אבטחה, קטעים ללא צנזורה, הדלפות טלגרם, וידאו חם HD, קבוצות ישראליות סודיות, הדלפות טלגרם 18+, סרטוני הדלפות ישראליות, קבוצות טלגרם VIP, קישורים לערוצי טלגרם חמים, סרטונים ללא צנזורה, בנות תל אביב HD">
+        <meta name="keywords" content="סרטונים חמים בישראל, נשים ישראליות, קבוצות ישראל, סרטונים 18, סרטונים בלעדיים, קבוצות VIP טלגרם">
         <meta name="robots" content="index, follow">
 
         <!-- Open Graph Meta Tags for Social Media Preview -->
         <meta property="og:title" content="סרטונים חמים בישראל">
         <meta property="og:description" content="אתר הסרטונים החמים בישראל 18+. נשים ובנות ישראליות, קבוצות VIP, סרטונים בלעדיים, הדלפות נסתרות ותוכן איכותי למבוגרים.">
+        <meta property="og:image" content="https://files.catbox.moe/c5lwce.jpg">
         <meta property="og:type" content="website">
 
         <!-- Adsterra Popunder Script -->
@@ -83,13 +83,7 @@ HTML_PAGE = """
             .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; }
             .video-views { font-size: 10px; color: #94a3b8; margin-bottom: 6px; }
             
-            video { 
-                width: 100%; 
-                height: 160px; 
-                border-radius: 6px; 
-                background: #000; 
-                object-fit: cover; 
-            }
+            video { width: 100%; height: 160px; border-radius: 6px; background: black; object-fit: cover; }
             
             .share-btn { display: block; width: 100%; margin-top: 8px; background: linear-gradient(90deg, #2563eb, #1d4ed8); color: white; text-align: center; padding: 6px; border-radius: 5px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; }
             .share-btn:hover { opacity: 0.9; }
@@ -102,7 +96,6 @@ HTML_PAGE = """
                 border-radius: 10px;
                 text-align: center;
                 box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-                margin: 10px 0;
             }
             .vip-banner-card h3 {
                 color: #f59e0b;
@@ -136,7 +129,7 @@ HTML_PAGE = """
             }
             .vip-btn:hover { opacity: 0.9; }
 
-            .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; grid-column: span 2; }
+            .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
             footer { background: #1e1f22; padding: 20px; text-align: center; border-top: 1px solid #2b2d31; margin-top: 40px; }
             .footer-title { font-size: 13px; color: #b5bac1; margin-bottom: 12px; font-weight: bold; }
@@ -144,7 +137,6 @@ HTML_PAGE = """
             .btn { padding: 7px 14px; text-decoration: none; border-radius: 6px; font-size: 11px; font-weight: bold; color: white; }
             .telegram-all { background: #0088cc; }
             .copyright { margin-top: 15px; font-size: 10px; color: #6b7280; }
-            .seo-text { font-size: 11px; color: #475569; text-align: right; margin-top: 15px; line-height: 1.5; }
         </style>
         
         <!-- Adsterra SocialBar Script -->
@@ -176,7 +168,7 @@ HTML_PAGE = """
         </div>
 
         <div class="content">
-            <!-- بنר إعلاني علوي 728x90 -->
+            <!-- بنر إعلاني علوي 728x90 -->
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
@@ -194,12 +186,85 @@ HTML_PAGE = """
                 <input type="text" id="searchInput" onkeyup="searchVideos()" placeholder="חפש סרטון או תוכן...">
             </div>
 
-            <h2 class="section-title" id="videosSectionTitle">🔥 סרטונים חמים חדשים</h2>
+            <h2 class="section-title">🔥 סרטונים חמים חדשים</h2>
             
-            <!-- حاوية عرض הפסודיוהות -->
-            <div class="videos-grid" id="videosGrid"></div>
+            <div class="videos-grid" id="videosGrid">
+                <script>
+                    const videosList = [
+                        "in681v.MOV", "yo3jfj.mp4", "oo7zyt.MP4",
+                        "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
+                        "wio4kl.mp4", "vo29gf.mp4", "qseq0i.mp4", "762n5t.mp4", "6qs6t8.mp4", "xtrtpd.mp4", 
+                        "xovx5v.mp4", "gca6vk.mp4", "sjj6dd.mp4", "vzginq.mp4", "lwbdy1.mp4", "o36fln.mp4", 
+                        "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
+                        "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
+                    ];
+                    
+                    const titlesList = [
+                        "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
+                        "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
+                        "📼🔒 קטעי וידאו אמיתיים ממצלמות אבטחה - סודי ביותר",
+                        "🚨🔥 בלעדי ולוהט במיוחד - חובה צפייה 18+",
+                        "💋💥 סרטון סודי ומטורף שעושה רושם רציני",
+                        "🔥💎 אקסקלוסיבי ברשת - מראות קשים ומרגשים",
+                        "⚡🔥 פצצת הערב - צפו לפני מחיקה!",
+                        "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
+                        "💖 לוהט במיוחד - בלעדי HD",
+                        "🔥 סודי ביותר - קטעים אסורים",
+                        "⚡ בלעדי באתר - ללא צנזורה 18+",
+                        "💎 חושני ומרגש - קטעים מיוחדים",
+                        "🔥 מיוחד למבוגרים - קסם המזרח התיכון",
+                        "💋 חדש וחם - יצירת מופת חזותית",
+                        "🔥 אקסקלוסיבי - שידור חי לוהט",
+                        "🌟 בלעדי ברשת - הרפתקאות לילה",
+                        "🔥 שערורייה - סרטונים אסורים",
+                        "💖 אהבה אסורה - סודות אפלים",
+                        "🔥 טירוף חושים - פיצוץ חושים אמיתי",
+                        "⚡ פצצת שסי - קטעים יוצאי דופן",
+                        "🔥 סרטון מטורף - הנאה ללא גבולות",
+                        "💎 VIP בלעדי - תוכן למבוגרים בלבד",
+                        "🔥 חם מהתנור - בלעדי לחלוטין",
+                        "💋 מגע של קסם - מפגשים לוהטים",
+                        "🔥 סודות אפלים - ריגושים אבסולוטיים",
+                        "🌟 אקסטרים - אתגרים לוהטים",
+                        "🔥 שיא החום - שיא המתח והריגוש",
+                        "💖 מומלץ ביותר - המבוקש ביותר",
+                        "🔥 בלעדי לחברי האתר - לילה מיוחד"
+                    ];
 
-            <!-- إעלנות إצפויות לפני הפותר -->
+                    const viewsList = ["7.4K", "8.9K", "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", "3.1K", "920", "4.0K", "1.3K", "2.7K"];
+
+                    for(let i = 0; i < videosList.length; i++) {
+                        let vName = videosList[i];
+                        let vTitle = titlesList[i];
+                        let vViews = viewsList[i];
+                        
+                        document.write(`
+                            <div class="video-card" data-title="${vTitle}">
+                                <h3>${vTitle}</h3>
+                                <div class="video-views">👁️ ${vViews} צפיות</div>
+                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
+                            </div>
+                        `);
+
+                        if ((i + 1) % 6 === 0 && i < videosList.length - 1) {
+                            document.write(`
+                                <div class="vip-banner-card">
+                                    <h3>🔥 קבוצות VIP בלעדיות בטלגרם 🔥</h3>
+                                    <blockquote class="vip-quote">
+                                        מחיר כניסה: 1000 כוכבי טלגרם 😎
+                                        התוכן כולל: 4000 סרטונים + 2 קבוצות במתנה (ישראלית, ערבית) 🇮🇱
+                                        שלח הודעה כאן לתשלום, לקבלת הקישורים:⬇️✅
+                                    </blockquote>
+                                    <a href="https://t.me/m/s4NRbGi6N2Fk" target="_blank" class="vip-btn">💬 הצטרף עכשיו ל-VIP</a>
+                                </div>
+                            `);
+                        }
+                    }
+                </script>
+            </div>
+
+            <!-- مكان عرض البانر الأصلي (Native Banner) و بنر 300x250 -->
             <div class="mid-ads-container">
                 <script async="async" data-cfasync="false" src="https://dcengg.org/21/c09daea963d6cca1b172e88ddfa0ee51"></script>
                 <div id="container-c09daea963d6cca1b172e88ddfa0ee51"></div>
@@ -227,117 +292,25 @@ HTML_PAGE = """
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">עדכונים חמים 🔥</a>
                 <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="btn telegram-all">ערוץ רשמי 🇮🇱</a>
             </div>
-            
-            <div class="seo-text">
-                אתר הסרטונים החמים בישראל מציג קטעים בלעדיים, הדלפות VIP, תוכן ללא צנזורה וסרטונים 18+ המתעדכנים יום יום.
-            </div>
-
             <div class="copyright">
                 כל הזכויות שמורות © 2026 | סרטונים חמים בישראל
             </div>
         </footer>
 
         <script>
-            // رابط سيرفر البث الخاص بك على Render
-            const STREAM_SERVER_URL = "https://joinbot.onrender.com"; 
-
-            // أرقام رسائل الفيديوهات المأخوذة من الروابط
-            const videosList = [
-                "25", "24", "23", "22", "21", "20", "17", "14", "15", "16"
-            ];
-
-            // عناوين توضيحية للفيديوهات
-            const titlesList = [
-                "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
-                "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
-                "🔥💣 הדלפה לוהטת במיוחד - צפו לפני שהיא נמחקת!",
-                "💋✨ לילה מטורף בתל אביב - תוכן VIP בלעדי 18+",
-                "🚨🔞 סרטון חם ששבר את הרשת - ללא צנזורה",
-                "💖🔥 מפגש רומנטי חם וסודי ביותר - צפייה חובה",
-                "⚡📱 קטעים מוצנעים שנחשפו לראשונה - מטורף!",
-                "🔥💎 אקסקלוסיבי לחברים: רגעים חמים ללא פילטרים",
-                "🌟💋 סרטון סודי מהקבוצה הסגורה - מומלץ ביותר",
-                "🚨🔥 טירוף חושים מוחלט - הדלפה חדשה מהשטח"
-            ];
-
-            // عدد مشاهدات مقترح لكل فيديو
-            const viewsList = [
-                "12.5K", "9.8K", "14.1K", "11.2K", "10.4K", "8.7K", "15.3K", "7.9K", "13.6K", "9.1K"
-            ];
-
-            const vipBannerHTML = `
-                <div class="vip-banner-card">
-                    <h3>📢 לצפייה בכל התוכן 🔥</h3>
-                    <blockquote class="vip-quote">
-                        👇 הירשמו לערוץ הרשמי כדי לקבל את כל הסרטונים החדשים והמיוחדים ברגע פרסומם וללא פרסומות 📲
-                    </blockquote>
-                    <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">🔞 לחצו כאן להצטרפות 🔗</a>
-                </div>
-            `;
-
-            function renderVideos() {
-                const grid = document.getElementById("videosGrid");
-                grid.innerHTML = "";
-
-                if (videosList.length === 0) {
-                    grid.innerHTML = "<p style='color:#cbd5e1; grid-column:span 2; text-align:center;'>אין סרטונים כרגע</p>";
-                    return;
-                }
-
-                videosList.forEach((msgId, index) => {
-                    const vTitle = titlesList[index] || "סרטון חדש";
-                    const vViews = viewsList[index] || "1.2K";
-
-                    const card = `
-                        <div class="video-card" data-title="${vTitle}">
-                            <h3>${vTitle}</h3>
-                            <div class="video-views">👁️ ${vViews} צפיות</div>
-                            <video preload="metadata" controls controlsList="nodownload" src="${STREAM_SERVER_URL}/stream/${msgId}"></video>
-                            <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
-                        </div>
-                    `;
-                    grid.innerHTML += card;
-
-                    if ((index + 1) % 6 === 0) {
-                        grid.innerHTML += vipBannerHTML;
-                    }
-                });
-            }
-
             function openNav() { document.getElementById("mySidebar").style.width = "220px"; }
             function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
             
             function searchVideos() {
                 let input = document.getElementById('searchInput').value.toLowerCase();
-                if (input.trim() === "") {
-                    renderVideos();
-                    return;
-                }
+                let cards = document.getElementsByClassName('video-card');
                 
-                const grid = document.getElementById("videosGrid");
-                grid.innerHTML = "";
-                
-                let matchCount = 0;
-                for (let i = 0; i < videosList.length; i++) {
-                    let title = (titlesList[i] || "").toLowerCase();
+                for (let i = 0; i < cards.length; i++) {
+                    let title = cards[i].getAttribute('data-title').toLowerCase();
                     if (title.includes(input)) {
-                        matchCount++;
-                        let msgId = videosList[i];
-                        let vTitle = titlesList[i] || "סרטון חדש";
-                        let vViews = viewsList[i] || "1.2K";
-                        
-                        grid.innerHTML += `
-                            <div class="video-card" data-title="${vTitle}">
-                                <h3>${vTitle}</h3>
-                                <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="metadata" controls controlsList="nodownload" src="${STREAM_SERVER_URL}/stream/${msgId}"></video>
-                                <button class="share-btn" onclick="shareVideo('${vTitle.replace(/'/g, "\\'")}')">שיתוף סרטון 🔗</button>
-                            </div>
-                        `;
-
-                        if (matchCount % 6 === 0) {
-                            grid.innerHTML += vipBannerHTML;
-                        }
+                        cards[i].style.display = "";
+                    } else {
+                        cards[i].style.display = "none";
                     }
                 }
             }
@@ -349,17 +322,15 @@ HTML_PAGE = """
                         text: 'צפה בסרטון המדהים הזה:',
                         url: window.location.href
                     }).then(() => {
-                        console.log('שתוף בוצע בהצלחה');
+                        console.log('تمت المشاركة بنجاح');
                     }).catch((error) => {
-                        console.log('שגיאה בשיתוף', error);
+                        console.log('خطأ في المشاركة', error);
                     });
                 } else {
                     navigator.clipboard.writeText(window.location.href);
                     alert('קישור האתר הועתק ללוח!');
                 }
             }
-
-            renderVideos();
         </script>
     </body>
 </html>
