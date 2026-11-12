@@ -3,6 +3,7 @@ from flask import Flask
 app = Flask(__name__)
 
 HTML_PAGE = """
+<!DOCTYPE html>
 <html dir="rtl" lang="he">
     <head>
         <title>סרטונים חמים בישראל</title>
@@ -58,63 +59,69 @@ HTML_PAGE = """
             .server-status { margin: 20px; background: #2b2d31; padding: 10px; border-radius: 6px; font-size: 11px; text-align: center; color: #b5bac1; }
             .online-dot { height: 7px; width: 7px; background-color: #23a55a; border-radius: 50%; display: inline-block; margin-right: 5px; }
 
-            .content { padding: 15px; max-width: 1200px; margin: auto; }
+            .content { padding: 15px; max-width: 600px; margin: auto; }
             .search-box { margin-bottom: 20px; text-align: center; }
-            .search-box input { width: 100%; max-width: 500px; padding: 10px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 12px; outline: none; text-align: right; }
+            .search-box input { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #2b2d31; background: #1e1f22; color: white; font-size: 13px; outline: none; text-align: right; }
 
             .top-ad-banner { text-align: center; margin: 15px 0; overflow: hidden; }
 
-            h2.section-title { font-size: 15px; color: #e2e8f0; margin-bottom: 15px; border-right: 4px solid #f59e0b; padding-right: 8px; text-align: right; }
+            h2.section-title { font-size: 16px; color: #e2e8f0; margin-bottom: 18px; border-right: 4px solid #f59e0b; padding-right: 8px; text-align: right; }
 
             .videos-grid { 
                 display: grid; 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 12px; 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
             }
             
             .video-card { 
                 background: #1e1f22; 
                 border: 1px solid #2b2d31; 
-                padding: 8px; 
-                border-radius: 8px; 
-                box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+                padding: 12px; 
+                border-radius: 10px; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.35); 
                 text-align: right;
             }
-            .video-card h3 { font-size: 11px; color: #f1f5f9; margin: 0 0 4px 0; overflow: hidden; text-overflow: ellipsis; }
-            .video-views { font-size: 10px; color: #94a3b8; margin-bottom: 6px; }
+            .video-card h3 { font-size: 14px; color: #f1f5f9; margin: 0 0 6px 0; line-height: 1.4; }
+            .video-views { font-size: 11px; color: #94a3b8; margin-bottom: 10px; }
             
-            video { width: 100%; height: 160px; border-radius: 6px; background: black; object-fit: cover; }
+            video { 
+                width: 100%; 
+                aspect-ratio: 1 / 1; 
+                max-height: 450px;
+                border-radius: 8px; 
+                background: black; 
+                object-fit: cover; 
+                display: block;
+            }
             
-            .share-btn { display: block; width: 100%; margin-top: 8px; background: linear-gradient(90deg, #2563eb, #1d4ed8); color: white; text-align: center; padding: 6px; border-radius: 5px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; }
+            .share-btn { display: block; width: 100%; margin-top: 10px; background: linear-gradient(90deg, #2563eb, #1d4ed8); color: white; text-align: center; padding: 9px; border-radius: 6px; font-size: 12px; font-weight: bold; border: none; cursor: pointer; }
             .share-btn:hover { opacity: 0.9; }
 
             .vip-banner-card {
-                grid-column: span 2;
                 background: linear-gradient(135deg, #1e1b4b, #311042);
                 border: 2px solid #f59e0b;
-                padding: 15px;
+                padding: 16px;
                 border-radius: 10px;
                 text-align: center;
                 box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
             }
             .vip-banner-card h3 {
                 color: #f59e0b;
-                font-size: 14px;
+                font-size: 15px;
                 margin-top: 0;
                 margin-bottom: 10px;
             }
             
             .vip-quote {
-                background: rgba(15, 23, 42, 0.6);
+                background: rgba(15, 23, 42, 0.65);
                 border-right: 4px solid #f59e0b;
-                padding: 10px 12px;
-                margin: 0 0 12px 0;
-                border-radius: 4px;
+                padding: 10px 14px;
+                margin: 0 0 14px 0;
+                border-radius: 5px;
                 text-align: right;
-                font-size: 12px;
+                font-size: 12.5px;
                 color: #f8fafc;
-                line-height: 1.6;
-                white-space: pre-line;
+                line-height: 1.65;
             }
 
             .vip-btn {
@@ -122,12 +129,13 @@ HTML_PAGE = """
                 background: linear-gradient(90deg, #f59e0b, #d97706);
                 color: white;
                 text-decoration: none;
-                padding: 8px 20px;
+                padding: 10px 22px;
                 border-radius: 6px;
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: bold;
+                box-shadow: 0 3px 10px rgba(217, 119, 6, 0.4);
             }
-            .vip-btn:hover { opacity: 0.9; }
+            .vip-btn:hover { opacity: 0.92; }
 
             .mid-ads-container { margin: 25px 0; text-align: center; background: #1e1f22; padding: 15px; border-radius: 8px; border: 1px solid #2b2d31; }
 
@@ -172,11 +180,11 @@ HTML_PAGE = """
             <div class="top-ad-banner">
                 <script>
                   atOptions = {
-                     key : '8a898fb2ff79e4f617a887a1fc16c862',
-                     format : 'iframe',
-                     height : 90,
-                     width : 728,
-                     params : {}
+                     'key' : '8a898fb2ff79e4f617a887a1fc16c862',
+                     'format' : 'iframe',
+                     'height' : 90,
+                     'width' : 728,
+                     'params' : {}
                   };
                 </script>
                 <script src="https://dcengg.org/22/8a898fb2ff79e4f617a887a1fc16c862"></script>
@@ -191,50 +199,46 @@ HTML_PAGE = """
             <div class="videos-grid" id="videosGrid">
                 <script>
                     const videosList = [
-                        "in681v.MOV", "yo3jfj.mp4", "oo7zyt.MP4",
-                        "hpf5qe.mp4", "qwc5h3.mp4", "fjo10s.mp4", "qwc5h3.mp4",
-                        "wio4kl.mp4", "vo29gf.mp4", "qseq0i.mp4", "762n5t.mp4", "6qs6t8.mp4", "xtrtpd.mp4", 
-                        "xovx5v.mp4", "gca6vk.mp4", "sjj6dd.mp4", "vzginq.mp4", "lwbdy1.mp4", "o36fln.mp4", 
-                        "rv9c5v.mp4", "lkqw9a.mp4", "y9teda.mp4", "ly7k1z.mp4", "15e5t5.mp4", "dtklvc.mp4", 
-                        "k79dhg.mp4", "uk5hrq.mp4", "nvfstt.mp4", "9nps91.mp4"
+                        "https://qu.ax/Pnsw8.mp4",
+                        "https://qu.ax/o9g5C.mp4",
+                        "https://qu.ax/g42Cw.mp4",
+                        "https://qu.ax/XfZ5S.mp4",
+                        "https://qu.ax/gHaSb.mp4",
+                        "https://qu.ax/8grcz.mp4",
+                        "https://qu.ax/pC5qM.mp4",
+                        "https://qu.ax/V05Ea.mp4",
+                        "https://qu.ax/NJbib.mp4",
+                        "https://qu.ax/QNrxc.mp4",
+                        "https://qu.ax/UOhgX.mp4",
+                        "https://qu.ax/R1GKd.mp4",
+                        "https://qu.ax/CNyPh.mp4",
+                        "https://qu.ax/664TP.mp4"
                     ];
                     
                     const titlesList = [
-                        "🚨📷 הדלפות מצלמות אבטחה נסתרות - בלעדי 18+",
-                        "🛏️🔥 צפו במצלמת חדרי השינה של זוגות - לוהט במיוחד",
-                        "📼🔒 קטעי וידאו אמיתיים ממצלמות אבטחה - סודי ביותר",
-                        "🚨🔥 בלעדי ולוהט במיוחד - חובה צפייה 18+",
-                        "💋💥 סרטון סודי ומטורף שעושה רושם רציני",
-                        "🔥💎 אקסקלוסיבי ברשת - מראות קשים ומרגשים",
-                        "⚡🔥 פצצת הערב - צפו לפני מחיקה!",
-                        "🔥 סרטון בלעדי חם מאוד - תל אביב VIP",
-                        "💖 לוהט במיוחד - בלעדי HD",
-                        "🔥 סודי ביותר - קטעים אסורים",
-                        "⚡ בלעדי באתר - ללא צנזורה 18+",
-                        "💎 חושני ומרגש - קטעים מיוחדים",
-                        "🔥 מיוחד למבוגרים - קסם המזרח התיכון",
-                        "💋 חדש וחם - יצירת מופת חזותית",
-                        "🔥 אקסקלוסיבי - שידור חי לוהט",
-                        "🌟 בלעדי ברשת - הרפתקאות לילה",
-                        "🔥 שערורייה - סרטונים אסורים",
-                        "💖 אהבה אסורה - סודות אפלים",
-                        "🔥 טירוף חושים - פיצוץ חושים אמיתי",
-                        "⚡ פצצת שסי - קטעים יוצאי דופן",
-                        "🔥 סרטון מטורף - הנאה ללא גבולות",
-                        "💎 VIP בלעדי - תוכן למבוגרים בלבד",
-                        "🔥 חם מהתנור - בלעדי לחלוטין",
-                        "💋 מגע של קסם - מפגשים לוהטים",
-                        "🔥 סודות אפלים - ריגושים אבסולוטיים",
-                        "🌟 אקסטרים - אתגרים לוהטים",
-                        "🔥 שיא החום - שיא המתח והריגוש",
-                        "💖 מומלץ ביותר - המבוקש ביותר",
-                        "🔥 בלעדי לחברי האתר - לילה מיוחד"
+                        "🚨🔥 הדלפה בלעדית מתל אביב - צפו לפני שיימחק! 18+",
+                        "💋🛏️ רגעים לוהטים בחדר השינה - צילום ביתי אמיתי",
+                        "📹🔒 מצלמות אבטחה נסתרות חושפות הכל - סודי ביותר",
+                        "🔥💎 הישראלית שמשגעת את הרשת - גרסה מלאה ללא צנזורה",
+                        "⚡🔞 מפגש לילי סוער - תיעוד נדיר ומטריף חושים",
+                        "🚨💥 הדלפה חמה מהקבוצות הסגורות - חובה לצפייה!",
+                        "💖🔥 תשוקה ללא גבולות - קטע אקסקלוסיבי באיכות HD",
+                        "🔒📷 תיעוד נסתר מהמלון - מה שקורה מאחורי דלתות סגורות",
+                        "💋⚡ סרטון הערב שכולם מדברים עליו - לוהט במיוחד",
+                        "🔥🌟 פצצה ישראלית בתיעוד פרטי שדלף לרשת",
+                        "🔞💎 לילה של טירוף חושים - בלעדי לגולשי האתר",
+                        "🚨🔥 סקנדל חדש ברשת - הקטע המלא נחשף לראשונה!",
+                        "💥💋 רגעים אינטימיים לוהטים - מומלץ לצפייה 18+",
+                        "⚡🔥 שיא החום והריגוש - תיעוד בלעדי שאסור לפספס"
                     ];
 
-                    const viewsList = ["7.4K", "8.9K", "6.5K", "5.2K", "4.8K", "6.1K", "3.9K", "1.4K", "850", "3.2K", "620", "2.1K", "940", "4.5K", "1.1K", "780", "2.9K", "1.8K", "3.6K", "530", "1.2K", "2.4K", "890", "1.7K", "3.1K", "920", "4.0K", "1.3K", "2.7K"];
+                    const viewsList = [
+                        "9.4K", "7.8K", "11.2K", "6.5K", "8.9K", "12.1K", "5.7K",
+                        "10.3K", "6.9K", "8.4K", "7.1K", "9.8K", "6.2K", "13.5K"
+                    ];
 
                     for(let i = 0; i < videosList.length; i++) {
-                        let vName = videosList[i];
+                        let vUrl = videosList[i];
                         let vTitle = titlesList[i];
                         let vViews = viewsList[i];
                         
@@ -242,24 +246,22 @@ HTML_PAGE = """
                             <div class="video-card" data-title="${vTitle}">
                                 <h3>${vTitle}</h3>
                                 <div class="video-views">👁️ ${vViews} צפיות</div>
-                                <video preload="metadata" controls controlsList="nodownload" src="https://files.catbox.moe/${vName}#t=0.1"></video>
+                                <video preload="metadata" controls playsinline controlsList="nodownload">
+                                    <source src="${vUrl}#t=0.1" type="video/mp4">
+                                </video>
                                 <button class="share-btn" onclick="shareVideo('${vTitle}')">שיתוף סרטון 🔗</button>
                             </div>
-                        `);
 
-                        if ((i + 1) % 6 === 0 && i < videosList.length - 1) {
-                            document.write(`
-                                <div class="vip-banner-card">
-                                    <h3>🔥 קבוצות VIP בלעדיות בטלגרם 🔥</h3>
-                                    <blockquote class="vip-quote">
-                                        מחיר כניסה: 1000 כוכבי טלגרם 😎
-                                        התוכן כולל: 4000 סרטונים + 2 קבוצות במתנה (ישראלית, ערבית) 🇮🇱
-                                        שלח הודעה כאן לתשלום, לקבלת הקישורים:⬇️✅
-                                    </blockquote>
-                                    <a href="https://t.me/m/s4NRbGi6N2Fk" target="_blank" class="vip-btn">💬 הצטרף עכשיו ל-VIP</a>
-                                </div>
-                            `);
-                        }
+                            <div class="vip-banner-card">
+                                <h3>🔥 סרטונים בלעדיים בטלגרם 🔥</h3>
+                                <blockquote class="vip-quote">
+                                    רוצה לצפות בכל הסרטונים המלאים והבלעדיים בחינם? 🎬🔞<br>
+                                    כל התוכן החם והעדכונים החדשים מחכים לך בערוץ הטלגרם הפרטי שלנו!<br>
+                                    לחץ על הכפתור למטה להצטרפות מיידית: ⬇️✅
+                                </blockquote>
+                                <a href="https://t.me/+dnhsq9fuecplOWQ0" target="_blank" class="vip-btn">📲 הצטרף לערוץ הטלגרם</a>
+                            </div>
+                        `);
                     }
                 </script>
             </div>
@@ -273,11 +275,11 @@ HTML_PAGE = """
             <div class="mid-ads-container">
                 <script>
                   atOptions = {
-                     key : 'acb79a2efda8a0e4fae251b979f31414',
-                     format : 'iframe',
-                     height : 250,
-                     width : 300,
-                     params : {}
+                     'key' : 'acb79a2efda8a0e4fae251b979f31414',
+                     'format' : 'iframe',
+                     'height' : 250,
+                     'width' : 300,
+                     'params' : {}
                   };
                 </script>
                 <script src="https://dcengg.org/22/acb79a2efda8a0e4fae251b979f31414"></script>
@@ -307,10 +309,17 @@ HTML_PAGE = """
                 
                 for (let i = 0; i < cards.length; i++) {
                     let title = cards[i].getAttribute('data-title').toLowerCase();
+                    let nextBanner = cards[i].nextElementSibling;
                     if (title.includes(input)) {
                         cards[i].style.display = "";
+                        if (nextBanner && nextBanner.classList.contains('vip-banner-card')) {
+                            nextBanner.style.display = "";
+                        }
                     } else {
                         cards[i].style.display = "none";
+                        if (nextBanner && nextBanner.classList.contains('vip-banner-card')) {
+                            nextBanner.style.display = "none";
+                        }
                     }
                 }
             }
@@ -319,12 +328,10 @@ HTML_PAGE = """
                 if (navigator.share) {
                     navigator.share({
                         title: title,
-                        text: 'צפה בסרטון המדהים הזה:',
+                        text: 'צפה בסרטון המדהים הזה: ',
                         url: window.location.href
-                    }).then(() => {
-                        console.log('تمت المشاركة بنجاح');
                     }).catch((error) => {
-                        console.log('خطأ في المشاركة', error);
+                        console.log('שגיאה בשיתוף', error);
                     });
                 } else {
                     navigator.clipboard.writeText(window.location.href);
