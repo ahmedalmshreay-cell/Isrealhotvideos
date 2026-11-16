@@ -494,6 +494,17 @@ HTML_TEMPLATE = """
             border-color: #3f3f46;
         }
 
+        /* شريط تمييز الفيديو المُشارك */
+        .shared-banner {
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            color: #09090b;
+            font-size: 12px;
+            font-weight: 900;
+            text-align: center;
+            padding: 5px 10px;
+            display: none;
+        }
+
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -891,6 +902,8 @@ HTML_TEMPLATE = """
                      data-views="{{ video.views }}"
                      data-order="{{ loop.index }}">
                 
+                <div class="shared-banner" id="shared-banner-{{ video.id }}">🎬 הסרטון ששותף איתך • לחץ לצפייה</div>
+
                 <div class="video-wrapper" onclick="playVideoFromWrapper(this)">
                     <video preload="metadata" controls playsinline controlsList="nodownload" onplay="handleVideoPlay(this, '{{ video.id }}')">
                         <source src="{{ video.url }}#t=2.0" type="video/mp4">
@@ -924,7 +937,7 @@ HTML_TEMPLATE = """
                         <button class="action-btn like-btn" id="like-btn-{{ video.id }}" onclick="toggleLike('{{ video.id }}')">
                             ❤️ <span id="like-count-{{ video.id }}">{{ video.likes }}</span>
                         </button>
-                        <button class="action-btn" onclick="shareVideo('{{ video.archive_title }}')">
+                        <button class="action-btn" onclick="shareVideo('{{ video.id }}', '{{ video.archive_title }}')">
                             🔗 שתף
                         </button>
                         <a href="{{ telegram_link }}" target="_blank" class="action-btn btn-tg-full">
@@ -1028,14 +1041,9 @@ HTML_TEMPLATE = """
         // الضغطة الأولى على الفيديو: فتح الرابط المباشر + فك القفل عن الفيديو للضغطة الثانية
         function unlockVideoWithDirectAd(event, shieldEl, vidId, adUrl) {
             event.stopPropagation();
-            
-            // فتح الرابط المباشر في نافذة جديدة
             window.open(adUrl, '_blank', 'noopener,noreferrer');
-            
-            // إزالة طبقة القفل عن هذا الفيديو ليتمكن الزائر من تشغيله في الضغطة الثانية
             shieldEl.remove();
             
-            // تغيير لون زر التشغيل للأخضر للإشارة إلى أن الفيديو جاهز للتشغيل الآن
             const circle = document.getElementById('circle-' + vidId);
             if (circle) {
                 circle.style.background = 'rgba(34, 197, 94, 0.92)';
@@ -1187,6 +1195,21 @@ HTML_TEMPLATE = """
             .catch(() => {});
         }
 
+        // مشاركة رابط مخصص يفتح نفس الفيديو في مقدمة الموقع
+        function shareVideo(vidId, title) {
+            const shareUrl = window.location.origin + '/?v=' + vidId;
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: 'צפה בתיעוד הבלעדי הזה ב-ISRAFLIX VIP: ',
+                    url: shareUrl
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(shareUrl);
+                alert('קישור הסרטון הועתק! שלח לחברים 🔗');
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             sendHeartbeat();
             setInterval(sendHeartbeat, 15000);
@@ -1197,20 +1220,26 @@ HTML_TEMPLATE = """
                     btn.classList.add('liked');
                 }
             });
-        });
 
-        function shareVideo(title) {
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: 'צפה בתיעוד הבלעדי הזה ב-ISRAFLIX VIP: ',
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('הקישור הועתק! שתף עם חברים 🔗');
+            // عند فتح رابط مشاركة فيديو محدد (?v=vid_X)، يتم نقله لأعلى الصفحة وتمييزه
+            const params = new URLSearchParams(window.location.search);
+            const sharedVidId = params.get('v');
+            if (sharedVidId) {
+                const targetCard = document.getElementById('card-' + sharedVidId);
+                const grid = document.getElementById('videosGrid');
+                const banner = document.getElementById('shared-banner-' + sharedVidId);
+                if (targetCard && grid) {
+                    targetCard.classList.remove('hidden-item', 'initial-hidden');
+                    targetCard.style.border = '2px solid var(--gold)';
+                    targetCard.style.boxShadow = '0 0 25px rgba(245, 158, 11, 0.35)';
+                    if (banner) banner.style.display = 'block';
+                    grid.prepend(targetCard);
+                    setTimeout(() => {
+                        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
             }
-        }
+        });
     </script>
 </body>
 </html>
