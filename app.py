@@ -6,7 +6,7 @@ app = Flask(__name__)
 # --- الإعدادات الأساسية القابلة للتعديل بسهولة ---
 ADSGRAM_BLOCK_ID = "60722"
 REQUIRED_SHARES = 5
-SHARE_LINK = "https://t.me/+dnhsq9fuecplOWQ0"
+SHARE_LINK = "https://t.me/joinchat/KE7X0y5jkuIyYTgx"
 SHARE_MESSAGE = "🔥 סרטונים בלעדיים והדלפות חמות 18+ בחינם! 🔞\nהגישה נפתחה עכשיו לזמן מוגבל 👇"
 UNLOCK_REDIRECT_LINK = "https://t.me/joinchat/KE7X0y5jkuIyYTgx"
 
