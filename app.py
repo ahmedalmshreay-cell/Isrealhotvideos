@@ -4,6 +4,7 @@ from flask import Flask, render_template_string, make_response
 app = Flask(__name__)
 
 # --- الإعدادات الأساسية القابلة للتعديل بسهولة ---
+ADSGRAM_BLOCK_ID = "60722"
 REQUIRED_SHARES = 5
 SHARE_LINK = "https://t.me/+dnhsq9fuecplOWQ0"
 SHARE_MESSAGE = "התוכן המלא נפתח! סרטונים בלעדיים מחכים לך כאן 🔥👇"
@@ -19,6 +20,9 @@ HTML_TEMPLATE = """
 
     <!-- Telegram WebApp SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Adsgram Rewarded Ads SDK -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 
     <!-- Google Fonts: Heebo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -221,7 +225,7 @@ HTML_TEMPLATE = """
         </div>
 
         <button class="btn btn-share" id="shareBtn" onclick="handleShare()">
-            <span>שתף עם חברים 🥵</span>
+            <span id="shareBtnText">שתף עם חברים 🥵</span>
         </button>
 
         <button class="btn btn-unlock" id="unlockBtn" onclick="handleUnlock()">
@@ -232,11 +236,12 @@ HTML_TEMPLATE = """
     </div>
 
     <script>
+        const ADSGRAM_BLOCK_ID = {{ block_id | tojson }};
         const REQUIRED_SHARES = {{ required_shares }};
         const SHARE_LINK = {{ share_link | tojson }};
         const SHARE_MESSAGE = {{ share_message | tojson }};
         const UNLOCK_URL = {{ unlock_url | tojson }};
-        const STORAGE_KEY = "tg_share_progress_v1";
+        const STORAGE_KEY = "tg_share_progress_v2";
 
         let currentShares = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10);
         if (isNaN(currentShares) || currentShares < 0) currentShares = 0;
@@ -244,14 +249,40 @@ HTML_TEMPLATE = """
 
         let isVerifying = false;
         let pendingShareIncrement = false;
+        let AdController = null;
 
-        // تهيئة واجهة Telegram WebApp إن فُتحت الصفحة داخل تيليجرام
+        // تهيئة واجهة Telegram WebApp
         if (window.Telegram && window.Telegram.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
             tg.expand();
             if (tg.setHeaderColor) tg.setHeaderColor('#080c14');
             if (tg.setBackgroundColor) tg.setBackgroundColor('#080c14');
+        }
+
+        // تهيئة متحكم إعلانات Adsgram
+        if (window.Adsgram) {
+            try {
+                AdController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+            } catch (e) {
+                console.warn("Adsgram init error:", e);
+            }
+        }
+
+        function showRewardedAd(onFinish) {
+            if (!AdController) {
+                onFinish();
+                return;
+            }
+            AdController.show()
+                .then(() => {
+                    // تم مشاهدة الإعلان بنجاح
+                    onFinish();
+                })
+                .catch(() => {
+                    // في حال عدم توفر إعلان حالياً للمستخدم أو إغلاقه، نكمل بسلاسة
+                    onFinish();
+                });
         }
 
         function updateUI() {
@@ -288,6 +319,8 @@ HTML_TEMPLATE = """
         }
 
         function handleShare() {
+            if (isVerifying) return;
+
             const tgShareUrl = `https://t.me/share/url?url=${encodeURIComponent(SHARE_LINK)}&text=${encodeURIComponent(SHARE_MESSAGE)}`;
 
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
@@ -296,17 +329,29 @@ HTML_TEMPLATE = """
                 window.open(tgShareUrl, "_blank");
             }
 
-            // احتساب المشاركة عند عودة المستخدم للصفحة أو بعد مهلة قصيرة
             pendingShareIncrement = true;
             setTimeout(() => {
                 if (pendingShareIncrement) {
-                    completeOneShare();
+                    processShareWithAd();
                 }
-            }, 2500);
+            }, 2200);
+        }
+
+        function processShareWithAd() {
+            if (!pendingShareIncrement) return;
+            pendingShareIncrement = false;
+
+            const shareBtnText = document.getElementById("shareBtnText");
+            shareBtnText.textContent = "מאמת שיתוף... ⏳";
+
+            // عرض إعلان Adsgram قبل احتساب المشاركة لزيادة المصداقية والأرباح
+            showRewardedAd(() => {
+                shareBtnText.textContent = "שתף עם חברים 🥵";
+                completeOneShare();
+            });
         }
 
         function completeOneShare() {
-            pendingShareIncrement = false;
             if (currentShares < REQUIRED_SHARES) {
                 currentShares += 1;
                 localStorage.setItem(STORAGE_KEY, currentShares.toString());
@@ -323,7 +368,7 @@ HTML_TEMPLATE = """
 
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "visible" && pendingShareIncrement) {
-                completeOneShare();
+                processShareWithAd();
             }
         });
 
@@ -331,15 +376,17 @@ HTML_TEMPLATE = """
             if (isVerifying) return;
 
             if (currentShares >= REQUIRED_SHARES) {
-                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink && UNLOCK_URL.startsWith("https://t.me/")) {
-                    window.Telegram.WebApp.openTelegramLink(UNLOCK_URL);
-                } else {
-                    window.location.href = UNLOCK_URL;
-                }
+                // عرض إعلان أخير عند الفتح أو التوجيه مباشرة
+                showRewardedAd(() => {
+                    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink && UNLOCK_URL.startsWith("https://t.me/")) {
+                        window.Telegram.WebApp.openTelegramLink(UNLOCK_URL);
+                    } else {
+                        window.location.href = UNLOCK_URL;
+                    }
+                });
                 return;
             }
 
-            // عدّاد انتظار قصير للتحقق كما في الفيديو
             isVerifying = true;
             let secondsLeft = 3;
             const unlockBtnText = document.getElementById("unlockBtnText");
@@ -351,10 +398,12 @@ HTML_TEMPLATE = """
                     unlockBtnText.textContent = `בודק שיתופים... ${secondsLeft}s`;
                 } else {
                     clearInterval(timer);
-                    isVerifying = false;
-                    updateUI();
-                    const remaining = REQUIRED_SHARES - currentShares;
-                    showAlert(`⚠️ הגישה עדיין נעולה! נותרו לך עוד ${remaining} שיתופים כדי לפתוח את הסרטונים 🔒`, "warning");
+                    showRewardedAd(() => {
+                        isVerifying = false;
+                        updateUI();
+                        const remaining = REQUIRED_SHARES - currentShares;
+                        showAlert(`⚠️ הגישה עדיין נעולה! נותרו לך עוד ${remaining} שיתופים כדי לפתוח את הסרטונים 🔒`, "warning");
+                    });
                 }
             }, 1000);
         }
@@ -369,6 +418,7 @@ HTML_TEMPLATE = """
 def home():
     response = make_response(render_template_string(
         HTML_TEMPLATE,
+        block_id=ADSGRAM_BLOCK_ID,
         required_shares=REQUIRED_SHARES,
         share_link=SHARE_LINK,
         share_message=SHARE_MESSAGE,
