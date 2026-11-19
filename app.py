@@ -7,7 +7,7 @@ app = Flask(__name__)
 ADSGRAM_BLOCK_ID = "60722"
 REQUIRED_SHARES = 5
 SHARE_LINK = "https://t.me/+dnhsq9fuecplOWQ0"
-SHARE_MESSAGE = "התוכן המלא נפתח! סרטונים בלעדיים מחכים לך כאן 🔥👇"
+SHARE_MESSAGE = "🔥 סרטונים בלעדיים והדלפות חמות 18+ בחינם! 🔞\nהגישה נפתחה עכשיו לזמן מוגבל 👇"
 UNLOCK_REDIRECT_LINK = "https://t.me/+dnhsq9fuecplOWQ0"
 
 HTML_TEMPLATE = """
@@ -251,7 +251,6 @@ HTML_TEMPLATE = """
         let pendingShareIncrement = false;
         let AdController = null;
 
-        // تهيئة واجهة Telegram WebApp
         if (window.Telegram && window.Telegram.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready();
@@ -260,7 +259,6 @@ HTML_TEMPLATE = """
             if (tg.setBackgroundColor) tg.setBackgroundColor('#080c14');
         }
 
-        // تهيئة متحكم إعلانات Adsgram
         if (window.Adsgram) {
             try {
                 AdController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
@@ -276,11 +274,9 @@ HTML_TEMPLATE = """
             }
             AdController.show()
                 .then(() => {
-                    // تم مشاهدة الإعلان بنجاح
                     onFinish();
                 })
                 .catch(() => {
-                    // في حال عدم توفر إعلان حالياً للمستخدم أو إغلاقه، نكمل بسلاسة
                     onFinish();
                 });
         }
@@ -321,7 +317,9 @@ HTML_TEMPLATE = """
         function handleShare() {
             if (isVerifying) return;
 
-            const tgShareUrl = `https://t.me/share/url?url=${encodeURIComponent(SHARE_LINK)}&text=${encodeURIComponent(SHARE_MESSAGE)}`;
+            // وضع النص في الأعلى والرابط تحته مباشرة عبر ترك معامل url فارغاً
+            const fullShareText = `${SHARE_MESSAGE}\n\n${SHARE_LINK}`;
+            const tgShareUrl = `https://t.me/share/url?url=%20&text=${encodeURIComponent(fullShareText)}`;
 
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
                 window.Telegram.WebApp.openTelegramLink(tgShareUrl);
@@ -344,7 +342,6 @@ HTML_TEMPLATE = """
             const shareBtnText = document.getElementById("shareBtnText");
             shareBtnText.textContent = "מאמת שיתוף... ⏳";
 
-            // عرض إعلان Adsgram قبل احتساب المشاركة لزيادة المصداقية والأرباح
             showRewardedAd(() => {
                 shareBtnText.textContent = "שתף עם חברים 🥵";
                 completeOneShare();
@@ -376,7 +373,6 @@ HTML_TEMPLATE = """
             if (isVerifying) return;
 
             if (currentShares >= REQUIRED_SHARES) {
-                // عرض إعلان أخير عند الفتح أو التوجيه مباشرة
                 showRewardedAd(() => {
                     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink && UNLOCK_URL.startsWith("https://t.me/")) {
                         window.Telegram.WebApp.openTelegramLink(UNLOCK_URL);
