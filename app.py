@@ -4,7 +4,7 @@ from flask import Flask, render_template_string, make_response
 app = Flask(__name__)
 
 # --- الإعدادات الأساسية القابلة للتعديل بسهولة ---
-ADSGRAM_BLOCK_ID = "60722"
+ADSGRAM_BLOCK_ID = "61942"
 REQUIRED_SHARES = 5
 SHARE_LINK = "https://t.me/joinchat/lNChVTjm0EVjZTMx"
 SHARE_MESSAGE = "🔥 סרטונים בלעדיים והדלפות חמות 18+ בחינם! 🔞\nהגישה נפתחה עכשיו לזמן מוגבל 👇"
@@ -261,7 +261,7 @@ HTML_TEMPLATE = """
 
         if (window.Adsgram) {
             try {
-                AdController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+                AdController = window.Adsgram.init({ blockId: String(ADSGRAM_BLOCK_ID) });
             } catch (e) {
                 console.warn("Adsgram init error:", e);
             }
@@ -317,7 +317,6 @@ HTML_TEMPLATE = """
         function handleShare() {
             if (isVerifying) return;
 
-            // وضع النص في الأعلى والرابط تحته مباشرة عبر ترك معامل url فارغاً
             const fullShareText = `${SHARE_MESSAGE}\n\n${SHARE_LINK}`;
             const tgShareUrl = `https://t.me/share/url?url=%20&text=${encodeURIComponent(fullShareText)}`;
 
